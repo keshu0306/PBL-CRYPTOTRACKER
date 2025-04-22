@@ -9,8 +9,13 @@ export default function Home() {
 
   useEffect(() => {
     const fetchCryptocurrencies = async () => {
-      const data = await getTopCryptocurrencies();
-      setCryptocurrencies(data);
+      try {
+        const data = await getTopCryptocurrencies();
+        setCryptocurrencies(data);
+      } catch (error) {
+        console.error("Failed to fetch cryptocurrencies:", error);
+        // Optionally, display an error message to the user using a toast or alert
+      }
     };
 
     fetchCryptocurrencies();
