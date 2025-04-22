@@ -40,8 +40,7 @@ const Header = () => {
 
 
   const toggleTheme = useCallback(() => {
-    const newTheme = isDarkMode ? "light" : "dark";
-    setTheme(newTheme);
+    setTheme(isDarkMode ? "light" : "dark");
   }, [isDarkMode, setTheme]);
 
   return (
@@ -102,7 +101,7 @@ const Header = () => {
              <DropdownMenuItem className="flex items-center justify-between">
               Theme
               {mounted ? (
-                <Switch checked={isDarkMode} onCheckedChange={toggleTheme} />
+                <Switch checked={isDarkMode} onCheckedChange={() => toggleTheme()} />
               ) : null}
             </DropdownMenuItem>
             <DropdownMenuItem>
