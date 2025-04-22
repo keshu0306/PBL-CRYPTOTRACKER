@@ -67,7 +67,9 @@ const Header = () => {
           alt="Logo"
           className="rounded-full"
         />
-        <span className="font-bold text-xl">CryptoFolio</span>
+        <Link href="/" className="font-bold text-xl">
+          CryptoFolio
+        </Link>
       </div>
 
       {/* Navigation Links */}
