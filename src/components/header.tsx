@@ -21,6 +21,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { currencies } from "@/lib/currencies";
+import Link from "next/link";
 
 const Header = () => {
   const [mounted, setMounted] = useState(false);
@@ -70,9 +71,11 @@ const Header = () => {
           </DialogTrigger>
           <SwapDialog/>
         </Dialog>
-        <Button variant="ghost" size="sm">
-          Cryptocurrencies
-        </Button>
+        <Link href="/cryptocurrencies">
+          <Button variant="ghost" size="sm">
+            Cryptocurrencies
+          </Button>
+        </Link>
         <Button variant="ghost" size="sm">
           Pricing
         </Button>
