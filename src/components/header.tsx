@@ -210,7 +210,7 @@ const Header = () => {
       <div className="flex items-center space-x-4">
         <DropdownMenu open={open} onOpenChange={setOpen}>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0 rounded-full">
+            <Button variant="ghost" className="h-8 w-8 p-0 rounded-full hover:bg-yellow-500 hover:text-gray-900">
               <Settings className="h-5 w-5 text-muted-foreground" />
               <span className="sr-only">Open user menu</span>
             </Button>
