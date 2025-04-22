@@ -1,7 +1,7 @@
 'use client';
 
 import {getTopCryptocurrencies} from '@/services/coin-gecko';
-import {useEffect, useState} from 'react';
+import {useEffect, useState, useCallback} from 'react';
 import {
   Table,
   TableBody,
@@ -14,33 +14,65 @@ import {
 import {SparklineChart} from "@/components/sparkline-chart";
 import {useRouter} from "next/navigation";
 import {formatMarketCap} from "@/lib/utils";
+import {Button} from "@/components/ui/button";
+import {ReloadIcon} from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {Grid} from "lucide-react";
 
 export default function CryptocurrenciesPage() {
   const [cryptocurrencies, setCryptocurrencies] = useState([]);
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+  const [isGridDialogOpen, setIsGridDialogOpen] = useState(false);
+
+  const fetchCryptocurrencies = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      const data = await getTopCryptocurrencies();
+      setCryptocurrencies(data);
+    } catch (error) {
+      console.error("Failed to fetch cryptocurrencies:", error);
+      // Optionally, display an error message to the user using a toast or alert
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
-    const fetchCryptocurrencies = async () => {
-      try {
-        const data = await getTopCryptocurrencies();
-        setCryptocurrencies(data);
-      } catch (error) {
-        console.error("Failed to fetch cryptocurrencies:", error);
-        // Optionally, display an error message to the user using a toast or alert
-      }
-    };
-
     fetchCryptocurrencies();
 
     // Set up interval to refetch data every, for example, 60 seconds
     const intervalId = setInterval(fetchCryptocurrencies, 60000);
 
     return () => clearInterval(intervalId); // Clean up interval on unmount
-  }, []);
+  }, [fetchCryptocurrencies]);
 
   return (
     <div className="container mx-auto py-10">
-      <h1 className="text-3xl font-bold mb-5">Today's Crypto Prices by Market Cap</h1>
+      <div className="flex justify-between items-center mb-5">
+        <h1 className="text-3xl font-bold">Today's Crypto Prices by Market Cap</h1>
+        <Button onClick={fetchCryptocurrencies} disabled={isLoading}  className="rounded-full hover:bg-yellow-500 hover:text-gray-900">
+          {isLoading ? (
+            <>
+              <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+              Refreshing...
+            </>
+          ) : (
+            <>
+              <ReloadIcon className="mr-2 h-4 w-4" />
+              Refresh
+            </>
+          )}
+        </Button>
+
+      </div>
       <p className="text-muted-foreground mb-5">
         The worldwide cryptocurrency market capitalization today stands at an estimated $2.9T, seeing a 0.35% movement over the last 24 hours. The total cryptocurrency trading volume in the past day is roughly $99B. Bitcoin's market dominance is at about 61.4%.
       </p>
@@ -123,3 +155,4 @@ export default function CryptocurrenciesPage() {
     </div>
   );
 }
+
