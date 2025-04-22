@@ -31,7 +31,8 @@ const Header = () => {
     }
   }, []);
 
-  const toggleTheme = () => {
+  const toggleTheme = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.stopPropagation(); // Prevent dropdown from closing
     setIsDarkMode(prevMode => {
       const newMode = !prevMode;
       if (newMode) {
