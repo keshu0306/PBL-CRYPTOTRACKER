@@ -1,7 +1,7 @@
 'use client';
 
 import React, {useState, useEffect} from 'react';
-import {Search, Settings, Moon, Sun} from 'lucide-react';
+import {Search, Settings} from 'lucide-react';
 import {Button} from '@/components/ui/button';
 import {Avatar, AvatarFallback, AvatarImage} from '@/components/ui/avatar';
 import {Input} from '@/components/ui/input';
@@ -12,9 +12,21 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import {Switch} from '@/components/ui/switch';
+import {useTheme} from 'next-themes';
+import {SunIcon, MoonIcon} from '@radix-ui/react-icons';
+import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from '@/components/ui/select';
+import SwapDialog from "@/components/swap-dialog";
 
 const Header = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const {setTheme} = useTheme();
+  const [mounted, setMounted] = useState(false);
+  const [language, setLanguage] = useState('English');
+  const [currency, setCurrency] = useState('USD');
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     // On page load or when changing themes, best to add inline in `app.js`
@@ -35,10 +47,10 @@ const Header = () => {
     setIsDarkMode(prevMode => {
       const newMode = !prevMode;
       if (newMode) {
-        document.documentElement.classList.add('dark');
+        setTheme('dark');
         localStorage.theme = 'dark';
       } else {
-        document.documentElement.classList.remove('dark');
+        setTheme('light');
         localStorage.theme = 'light';
       }
       return newMode;
@@ -62,9 +74,7 @@ const Header = () => {
         <Button variant="ghost" size="sm">
           Portfolio Tracker
         </Button>
-        <Button variant="ghost" size="sm">
-          Swap
-        </Button>
+        <SwapDialog/>
         <Button variant="ghost" size="sm">
           Cryptocurrencies
         </Button>
@@ -99,10 +109,36 @@ const Header = () => {
             <DropdownMenuItem>Profile</DropdownMenuItem>
             <DropdownMenuItem className="flex items-center justify-between">
               Theme
-              <Switch checked={isDarkMode} onCheckedChange={toggleTheme} />
+              {mounted ? (
+                <Switch checked={isDarkMode} onCheckedChange={toggleTheme} />
+              ) : null}
             </DropdownMenuItem>
-            <DropdownMenuItem>Language</DropdownMenuItem>
-            <DropdownMenuItem>Currency</DropdownMenuItem>
+            <DropdownMenuItem>
+              Language
+              <Select value={language} onValueChange={setLanguage}>
+                <SelectTrigger className="w-[180px]">
+                  <SelectValue placeholder="Language" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="English">English</SelectItem>
+                  <SelectItem value="Spanish">Spanish</SelectItem>
+                  <SelectItem value="French">French</SelectItem>
+                </SelectContent>
+              </Select>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              Currency
+              <Select value={currency} onValueChange={setCurrency}>
+                <SelectTrigger className="w-[180px]">
+                  <SelectValue placeholder="Currency" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="USD">USD</SelectItem>
+                  <SelectItem value="EUR">EUR</SelectItem>
+                  <SelectItem value="GBP">GBP</SelectItem>
+                </SelectContent>
+              </Select>
+            </DropdownMenuItem>
             <DropdownMenuItem>Appearance</DropdownMenuItem>
             <DropdownMenuItem>Sign out</DropdownMenuItem>
           </DropdownMenuContent>
