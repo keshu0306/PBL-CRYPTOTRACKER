@@ -1,7 +1,7 @@
 'use client';
 
 import React, {useState, useEffect, useCallback} from 'react';
-import {Search, Settings} from 'lucide-react';
+import {Search, Settings, Grid} from 'lucide-react';
 import {Button} from '@/components/ui/button';
 import {Avatar, AvatarFallback, AvatarImage} from '@/components/ui/avatar';
 import {Input} from '@/components/ui/input';
@@ -70,7 +70,7 @@ const Header = () => {
           Pricing
         </Button>
         <Button variant="ghost" size="sm">
-          ...
+          <Grid className="h-4 w-4"/>
         </Button>
       </nav>
 
