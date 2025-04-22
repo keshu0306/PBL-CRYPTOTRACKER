@@ -1,11 +1,12 @@
 'use client';
 
 import React from 'react';
-import { Search, Settings } from 'lucide-react';
+import { Search, Settings, Moon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Input } from '@/components/ui/input';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { Switch } from "@/components/ui/switch"
 
 const Header = () => {
   return (
@@ -44,8 +45,9 @@ const Header = () => {
                 <DropdownMenuItem>
                   Profile
                 </DropdownMenuItem>
-                <DropdownMenuItem>
+                <DropdownMenuItem className="flex items-center justify-between">
                   Theme
+                  <Switch className="ml-2" />
                 </DropdownMenuItem>
                  <DropdownMenuItem>
                   Language
@@ -73,6 +75,3 @@ const Header = () => {
 };
 
 export default Header;
-
-
-    
