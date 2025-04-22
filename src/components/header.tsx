@@ -132,7 +132,9 @@ const Header = () => {
                       ))}
                     </>
                   ) : null}
-                </SelectMenuItem>
+                </SelectContent>
+              </Select>
+            </DropdownMenuItem>
             <DropdownMenuItem>Appearance</DropdownMenuItem>
             <DropdownMenuItem>Sign out</DropdownMenuItem>
           </DropdownMenuContent>
