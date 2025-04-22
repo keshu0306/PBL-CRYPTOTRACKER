@@ -32,10 +32,10 @@ const Header = () => {
     setMounted(true);
   }, []);
 
-  useEffect(() => {
+ useEffect(() => {
     const storedTheme = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const initialDarkMode = storedTheme === 'dark' || (!storedTheme && prefersDark);
+    let initialDarkMode = storedTheme === 'dark' || (!storedTheme && prefersDark);
 
     setIsDarkMode(initialDarkMode);
     if (mounted) {
@@ -44,8 +44,7 @@ const Header = () => {
     }
   }, [mounted, setTheme]);
 
-  const toggleTheme = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newMode = e.target.checked;
+  const toggleTheme = (newMode: boolean) => {
     setIsDarkMode(newMode);
     setTheme(newMode ? 'dark' : 'light');
     localStorage.setItem('theme', newMode ? 'dark' : 'light');
@@ -107,10 +106,10 @@ const Header = () => {
           </DropdownMenuTrigger>
           <DropdownMenuContent className="backdrop-blur-xl bg-secondary/80">
             <DropdownMenuItem>Profile</DropdownMenuItem>
-            <DropdownMenuItem className="flex items-center justify-between" onSelect={(e) => e.preventDefault()}>
+             <DropdownMenuItem className="flex items-center justify-between" onSelect={(e) => e.preventDefault()}>
               Theme
               {mounted ? (
-                <Switch checked={isDarkMode} onCheckedChange={toggleTheme} />
+                <Switch checked={isDarkMode} onCheckedChange={(e) => toggleTheme(e.target.checked)} />
               ) : null}
             </DropdownMenuItem>
             <DropdownMenuItem>
@@ -133,9 +132,13 @@ const Header = () => {
                   <SelectValue placeholder="Currency" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="USD">USD</SelectItem>
-                  <SelectItem value="EUR">EUR</SelectItem>
-                  <SelectItem value="GBP">GBP</SelectItem>
+                  {mounted ? (
+                    <>
+                      {currencies.map((currency) => (
+                        <SelectItem key={currency.code} value={currency.code}>{currency.name} ({currency.symbol})</SelectItem>
+                      ))}
+                    </>
+                  ) : null}
                 </SelectContent>
               </Select>
             </DropdownMenuItem>
@@ -157,3 +160,4 @@ const Header = () => {
 };
 
 export default Header;
+import { currencies } from "@/lib/currencies";
