@@ -43,7 +43,6 @@ const Header = () => {
     setIsDarkMode(initialDarkMode);
     if (mounted) {
       setTheme(initialDarkMode ? 'dark' : 'light');
-      document.documentElement.classList.toggle('dark', initialDarkMode);
     }
   }, [mounted, setTheme]);
 
@@ -51,7 +50,6 @@ const Header = () => {
     setIsDarkMode(newMode);
     setTheme(newMode ? 'dark' : 'light');
     localStorage.setItem('theme', newMode ? 'dark' : 'light');
-    document.documentElement.classList.toggle('dark', newMode);
   }, [setTheme]);
 
 
