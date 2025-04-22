@@ -1,4 +1,3 @@
-
 'use client';
 
 import React from 'react';
@@ -188,7 +187,7 @@ const SwapDialog = () => {
   };
 
   return (
-    <DialogContent className="sm:max-w-[425px] backdrop-blur-xl bg-secondary/20 border">
+    <DialogContent className="sm:max-w-[425px] backdrop-blur-xl bg-secondary/10 border">
       <DialogHeader>
         <DialogTitle>Swap</DialogTitle>
       </DialogHeader>
