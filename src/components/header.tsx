@@ -119,7 +119,7 @@ const Header = () => {
                 <SelectContent>
                   {mounted ? (
                     <>
-                      {currencies.map((currency) => (
+                      {currencies.sort((a, b) => a.name.localeCompare(b.name)).map((currency) => (
                         <SelectItem key={currency.code} value={currency.code}>{currency.name} ({currency.symbol})</SelectItem>
                       ))}
                     </>
@@ -136,7 +136,7 @@ const Header = () => {
                 <SelectContent>
                   {mounted ? (
                     <>
-                      {currencies.map((currency) => (
+                      {currencies.sort((a, b) => a.name.localeCompare(b.name)).map((currency) => (
                         <SelectItem key={currency.code} value={currency.code}>{currency.name} ({currency.symbol})</SelectItem>
                       ))}
                     </>
