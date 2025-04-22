@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/table"
 import {SparklineChart} from "@/components/sparkline-chart";
 import {useRouter} from "next/navigation";
+import {formatMarketCap} from "@/lib/utils";
 
 export default function CryptocurrenciesPage() {
   const [cryptocurrencies, setCryptocurrencies] = useState([]);
@@ -109,8 +110,8 @@ export default function CryptocurrenciesPage() {
                   )}
                 </TableCell>
                 <TableCell>${crypto.currentPrice}</TableCell>
-                <TableCell>${(crypto.currentPrice * 1000000).toFixed(0)}M</TableCell>
-                <TableCell>${(crypto.currentPrice * 10000).toFixed(0)}K</TableCell>
+                <TableCell>${formatMarketCap(crypto.currentPrice * 1000000)}</TableCell>
+                <TableCell>${formatMarketCap(crypto.currentPrice * 10000)}</TableCell>
                 <TableCell>
                   <SparklineChart data={[10, 30, 40, 20, 50, 60, 40]} color={crypto.priceChangePercentage24h > 0 ? "green" : "red"}/>
                 </TableCell>
