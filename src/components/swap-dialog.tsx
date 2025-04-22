@@ -12,35 +12,99 @@ import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/c
 import {useEffect, useState} from "react";
 import {Input} from "@/components/ui/input";
 import {ArrowDown, ArrowUp} from "lucide-react";
+import {useToast} from "@/hooks/use-toast";
 
 const SwapDialog = () => {
   const [isMounted, setIsMounted] = useState(false);
   const [payCoin, setPayCoin] = useState('');
   const [receiveCoin, setReceiveCoin] = useState('');
   const [payAmount, setPayAmount] = useState('');
-  const [receiveAmount, setReceiveAmount] = useState('0');
+  const [receiveAmount, setReceiveAmount] = useState('');
+  const [isConnected, setIsConnected] = useState(false);
+  const {toast} = useToast();
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
-  const handlePayCoinChange = (value: string) => {
+  const connectWallet = () => {
+    // Placeholder for wallet connection logic
+    setIsConnected(true);
+    toast({
+      title: "Wallet Connected!",
+      description: "Your wallet is now connected.",
+    });
+  };
+
+  const handlePayCoinChange = async (value: string) => {
     setPayCoin(value);
-    // In real app: Fetch the receiveCoin amount based on payCoin and amount
-    setReceiveAmount('0');
+    if (payAmount && receiveCoin) {
+      await calculateReceiveAmount(value, receiveCoin, payAmount);
+    }
   };
 
-  const handleReceiveCoinChange = (value: string) => {
+  const handleReceiveCoinChange = async (value: string) => {
     setReceiveCoin(value);
-    // In real app: Fetch the receiveCoin amount based on payCoin and amount
-    setReceiveAmount('0');
+    if (payAmount && payCoin) {
+      await calculateReceiveAmount(payCoin, value, payAmount);
+    }
   };
 
-  const handlePayAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePayAmountChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const amount = e.target.value;
     setPayAmount(amount);
-    // In real app: Fetch the receiveCoin amount based on payCoin
-    setReceiveAmount('0');
+    if (payCoin && receiveCoin) {
+      await calculateReceiveAmount(payCoin, receiveCoin, amount);
+    }
+  };
+
+  const calculateReceiveAmount = async (
+    payCurrency: string,
+    receiveCurrency: string,
+    amount: string
+  ) => {
+    // Placeholder for calculation logic based on selected coins and amount
+    // In a real app, this would involve fetching exchange rates and performing the calculation
+    try {
+      const rate = 0.5; // example of the rate
+      const receive = parseFloat(amount) * rate;
+      setReceiveAmount(receive.toString());
+    } catch (error) {
+      console.error("Error calculating receive amount:", error);
+      toast({
+        title: "Error",
+        description: "Could not calculate receive amount.",
+        variant: "destructive",
+      });
+      setReceiveAmount('');
+    }
+  };
+
+  const handleSwap = () => {
+    // Placeholder for swap logic
+    if (!isConnected) {
+      toast({
+        title: "Not connected",
+        description: "Please connect your wallet first.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (!payCoin || !receiveCoin || !payAmount) {
+      toast({
+        title: "Missing Fields",
+        description: "Please fill in all the required fields.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Perform swap
+    toast({
+      title: "Swap Successful!",
+      description: `Swapped ${payAmount} ${payCoin} for ${receiveAmount} ${receiveCoin}.`,
+    });
   };
 
   return (
@@ -52,8 +116,8 @@ const SwapDialog = () => {
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
             <div className="col-span-3 font-medium">Connect Your Wallet</div>
-            <Button variant="secondary" className="col-span-1">
-              Connect
+            <Button variant="secondary" className="col-span-1" onClick={connectWallet} disabled={isConnected}>
+              {isConnected ? 'Connected' : 'Connect'}
             </Button>
           </div>
 
@@ -110,7 +174,7 @@ const SwapDialog = () => {
               </SelectContent>
             </Select>
           </div>
-          <Button variant="secondary" disabled={!payCoin || !receiveCoin || !payAmount}>
+          <Button variant="secondary" onClick={handleSwap} disabled={!payCoin || !receiveCoin || !payAmount}>
             Swap
           </Button>
           <div className="grid grid-cols-2 items-center gap-4 bg-secondary rounded-lg">
