@@ -88,12 +88,9 @@ const Header = () => {
             Cryptocurrencies
           </Button>
         </Link>
-        <Button variant="ghost" size="sm" className="rounded-full hover:bg-yellow-500 hover:text-gray-900">
-          Pricing
-        </Button>
         <Dialog open={isGridDialogOpen} onOpenChange={setIsGridDialogOpen}>
           <DialogTrigger asChild>
-            <Button variant="ghost" size="sm" className="rounded-full hover:bg-yellow-500 hover:text-gray-900">
+            <Button variant="ghost" size="sm" className="h-8 w-8 rounded-full hover:bg-yellow-500 hover:text-gray-900">
               <Grid className="h-4 w-4"/>
             </Button>
           </DialogTrigger>
