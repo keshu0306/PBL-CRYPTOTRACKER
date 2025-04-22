@@ -10,6 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import Heatmap from "@/components/heatmap";
 
 export default function CryptocurrencyDetailPage() {
   const [cryptoDetails, setCryptoDetails] = useState(null);
@@ -35,6 +36,15 @@ export default function CryptocurrencyDetailPage() {
     return <div>Loading...</div>;
   }
 
+  // Generate sample heatmap data (replace with actual data)
+  const heatmapData = Array.from({length: 7}, (_, i) => ({
+    name: `Day ${i + 1}`,
+    data: Array.from({length: 24}, (_, j) => ({
+      time: `${j}:00`,
+      value: Math.floor(Math.random() * 100), // Random value for demonstration
+    })),
+  }));
+
   return (
     <div className="container mx-auto py-10">
       <Card>
@@ -45,8 +55,10 @@ export default function CryptocurrencyDetailPage() {
         <CardContent>
           <p>{cryptoDetails.description}</p>
           {/* Display historical prices or other details here */}
+          <Heatmap data={heatmapData} />
         </CardContent>
       </Card>
     </div>
   );
 }
+
