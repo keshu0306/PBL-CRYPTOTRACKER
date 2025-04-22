@@ -43,6 +43,10 @@ const Header = () => {
     setTheme(isDarkMode ? "light" : "dark");
   }, [isDarkMode, setTheme]);
 
+  const handleThemeToggle = useCallback(() => {
+    toggleTheme();
+  }, [toggleTheme]);
+
   return (
     <header className="bg-header-background text-header-foreground py-3 px-6 flex items-center justify-between sticky top-0 z-50">
       {/* Logo and App Name */}
@@ -101,7 +105,7 @@ const Header = () => {
              <DropdownMenuItem className="flex items-center justify-between">
               Theme
               {mounted ? (
-                <Switch checked={isDarkMode} onCheckedChange={() => toggleTheme()} />
+                <Switch checked={isDarkMode} onCheckedChange={handleThemeToggle} />
               ) : null}
             </DropdownMenuItem>
             <DropdownMenuItem>
