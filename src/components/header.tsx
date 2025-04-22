@@ -1,74 +1,120 @@
 'use client';
 
-import React from 'react';
-import { Search, Settings, Moon } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Input } from '@/components/ui/input';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Switch } from "@/components/ui/switch"
+import React, {useState, useEffect} from 'react';
+import {Search, Settings, Moon, Sun} from 'lucide-react';
+import {Button} from '@/components/ui/button';
+import {Avatar, AvatarFallback, AvatarImage} from '@/components/ui/avatar';
+import {Input} from '@/components/ui/input';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import {Switch} from '@/components/ui/switch';
 
 const Header = () => {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    // On page load or when changing themes, best to add inline in `app.js`
+    if (
+      localStorage.theme === 'dark' ||
+      (!('theme' in localStorage) &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches)
+    ) {
+      document.documentElement.classList.add('dark');
+      setIsDarkMode(true);
+    } else {
+      document.documentElement.classList.remove('dark');
+      setIsDarkMode(false);
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    setIsDarkMode(prevMode => {
+      const newMode = !prevMode;
+      if (newMode) {
+        document.documentElement.classList.add('dark');
+        localStorage.theme = 'dark';
+      } else {
+        document.documentElement.classList.remove('dark');
+        localStorage.theme = 'light';
+      }
+      return newMode;
+    });
+  };
+
   return (
     <header className="bg-header-background text-header-foreground py-3 px-6 flex items-center justify-between sticky top-0 z-50">
       {/* Logo and App Name */}
       <div className="flex items-center space-x-2">
-      <img src="https://picsum.photos/32/32" alt="Logo" className="rounded-full" />
+        <img
+          src="https://picsum.photos/32/32"
+          alt="Logo"
+          className="rounded-full"
+        />
         <span className="font-bold text-xl">CryptoFolio</span>
       </div>
 
       {/* Navigation Links */}
       <nav className="flex items-center space-x-4">
-        <Button variant="ghost" size="sm">Portfolio Tracker</Button>
-        <Button variant="ghost" size="sm">Swap</Button>
-        <Button variant="ghost" size="sm">Cryptocurrencies</Button>
-        <Button variant="ghost" size="sm">Pricing</Button>
-        <Button variant="ghost" size="sm">...</Button>
+        <Button variant="ghost" size="sm">
+          Portfolio Tracker
+        </Button>
+        <Button variant="ghost" size="sm">
+          Swap
+        </Button>
+        <Button variant="ghost" size="sm">
+          Cryptocurrencies
+        </Button>
+        <Button variant="ghost" size="sm">
+          Pricing
+        </Button>
+        <Button variant="ghost" size="sm">
+          ...
+        </Button>
       </nav>
 
       {/* Search Bar */}
       <div className="flex items-center space-x-2">
-        <Input type="search" placeholder="Assets, Wallets, Domains" className="bg-secondary text-secondary-foreground rounded-full py-2 px-4 w-64" />
+        <Input
+          type="search"
+          placeholder="Assets, Wallets, Domains"
+          className="bg-secondary text-secondary-foreground rounded-full py-2 px-4 w-64"
+        />
         <Search className="h-5 w-5 text-muted-foreground" />
       </div>
 
       {/* User Authentication */}
       <div className="flex items-center space-x-4">
         <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="h-8 w-8 p-0 rounded-full">
-                  <Settings className="h-5 w-5 text-muted-foreground" />
-                  <span className="sr-only">Open user menu</span>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem>
-                  Profile
-                </DropdownMenuItem>
-                <DropdownMenuItem className="flex items-center justify-between">
-                  Theme
-                  <Switch className="ml-2" />
-                </DropdownMenuItem>
-                 <DropdownMenuItem>
-                  Language
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  Currency
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  Appearance
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  Sign out
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-        <Button variant="outline" size="sm">Login</Button>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="h-8 w-8 p-0 rounded-full">
+              <Settings className="h-5 w-5 text-muted-foreground" />
+              <span className="sr-only">Open user menu</span>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem>Profile</DropdownMenuItem>
+            <DropdownMenuItem className="flex items-center justify-between">
+              Theme
+              <Switch checked={isDarkMode} onCheckedChange={toggleTheme} />
+            </DropdownMenuItem>
+            <DropdownMenuItem>Language</DropdownMenuItem>
+            <DropdownMenuItem>Currency</DropdownMenuItem>
+            <DropdownMenuItem>Appearance</DropdownMenuItem>
+            <DropdownMenuItem>Sign out</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+        <Button variant="outline" size="sm">
+          Login
+        </Button>
         <Button size="sm">Get Started</Button>
-          <Avatar className="h-8 w-8">
-            <AvatarImage src="https://picsum.photos/48/48" alt="Avatar" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
+        <Avatar className="h-8 w-8">
+          <AvatarImage src="https://picsum.photos/48/48" alt="Avatar" />
+          <AvatarFallback>CN</AvatarFallback>
+        </Avatar>
       </div>
     </header>
   );
