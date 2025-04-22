@@ -35,7 +35,9 @@ const Header = () => {
   }, []);
 
   const handleThemeToggle = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
+      console.log("Current theme:", theme);
+      setTheme(theme === 'light' ? 'dark' : 'light');
+      console.log("Theme toggled. New theme:", theme === 'light' ? 'dark' : 'light');
   };
 
   return (
