@@ -26,6 +26,22 @@ export interface Cryptocurrency {
    * Price change percentage in 24 hours.
    */
   priceChangePercentage24h: number;
+   /**
+   * Price change percentage in 1 hour.
+   */
+  priceChangePercentage1hInCurrency: number;
+  /**
+   * Price change percentage in 7 days.
+   */
+  priceChangePercentage7dInCurrency: number;
+   /**
+   * Market Cap.
+   */
+  marketCap: number;
+    /**
+   * Volume in 24 hours.
+   */
+  volume24h: number;
 }
 
 /**
@@ -35,7 +51,7 @@ export interface Cryptocurrency {
  */
 export async function getTopCryptocurrencies(): Promise<Cryptocurrency[]> {
   const url =
-    'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false';
+    'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false&price_change_percentage=1h,7d';
 
   try {
     const response = await fetch(url);
@@ -52,6 +68,10 @@ export async function getTopCryptocurrencies(): Promise<Cryptocurrency[]> {
       currentPrice: item.current_price,
       image: item.image,
       priceChangePercentage24h: item.price_change_percentage_24h,
+      priceChangePercentage1hInCurrency: item.price_change_percentage_1h_in_currency,
+      priceChangePercentage7dInCurrency: item.price_change_percentage_7d_in_currency,
+      marketCap: item.market_cap,
+      volume24h: item.total_volume,
     }));
   } catch (error) {
     console.error('Failed to fetch cryptocurrencies:', error);

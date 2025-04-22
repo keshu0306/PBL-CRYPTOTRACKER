@@ -89,29 +89,29 @@ export default function CryptocurrenciesPage() {
                   </div>
                 </TableCell>
                 <TableCell>
-                  {crypto.priceChangePercentage24h > 0 ? (
-                    <span className="text-green-500">▲{crypto.priceChangePercentage24h.toFixed(2)}%</span>
+                  {crypto.priceChangePercentage1hInCurrency > 0 ? (
+                    <span className="text-green-500">▲{crypto.priceChangePercentage1hInCurrency?.toFixed(2)}%</span>
                   ) : (
-                    <span className="text-red-500">▼{crypto.priceChangePercentage24h.toFixed(2)}%</span>
+                    <span className="text-red-500">▼{crypto.priceChangePercentage1hInCurrency?.toFixed(2)}%</span>
                   )}
                 </TableCell>
                  <TableCell>
                   {crypto.priceChangePercentage24h > 0 ? (
-                    <span className="text-green-500">▲{crypto.priceChangePercentage24h.toFixed(2)}%</span>
+                    <span className="text-green-500">▲{crypto.priceChangePercentage24h?.toFixed(2)}%</span>
                   ) : (
-                    <span className="text-red-500">▼{crypto.priceChangePercentage24h.toFixed(2)}%</span>
+                    <span className="text-red-500">▼{crypto.priceChangePercentage24h?.toFixed(2)}%</span>
                   )}
                 </TableCell>
                  <TableCell>
-                  {crypto.priceChangePercentage24h > 0 ? (
-                    <span className="text-green-500">▲{crypto.priceChangePercentage24h.toFixed(2)}%</span>
+                  {crypto.priceChangePercentage7dInCurrency > 0 ? (
+                    <span className="text-green-500">▲{crypto.priceChangePercentage7dInCurrency?.toFixed(2)}%</span>
                   ) : (
-                    <span className="text-red-500">▼{crypto.priceChangePercentage24h.toFixed(2)}%</span>
+                    <span className="text-red-500">▼{crypto.priceChangePercentage7dInCurrency?.toFixed(2)}%</span>
                   )}
                 </TableCell>
                 <TableCell>${crypto.currentPrice}</TableCell>
-                <TableCell>${formatMarketCap(crypto.currentPrice * 1000000)}</TableCell>
-                <TableCell>${formatMarketCap(crypto.currentPrice * 10000)}</TableCell>
+                <TableCell>${formatMarketCap(crypto.marketCap)}</TableCell>
+                <TableCell>${formatMarketCap(crypto.volume24h)}</TableCell>
                 <TableCell>
                   <SparklineChart data={[10, 30, 40, 20, 50, 60, 40]} color={crypto.priceChangePercentage24h > 0 ? "green" : "red"}/>
                 </TableCell>
