@@ -38,8 +38,11 @@ const Header = () => {
     const initialDarkMode = storedTheme === 'dark' || (!storedTheme && prefersDark);
 
     setIsDarkMode(initialDarkMode);
-    document.documentElement.classList.toggle('dark', initialDarkMode);
-  }, []);
+    if (mounted) {
+      setTheme(initialDarkMode ? 'dark' : 'light');
+      document.documentElement.classList.toggle('dark', initialDarkMode);
+    }
+  }, [mounted, setTheme]);
 
   const toggleTheme = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newMode = e.target.checked;
