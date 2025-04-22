@@ -74,26 +74,26 @@ const Header = () => {
 
       {/* Navigation Links */}
       <nav className="flex items-center space-x-4">
-        <Button variant="ghost" size="sm">
+        <Button variant="ghost" size="sm" className="rounded-full">
           Portfolio Tracker
         </Button>
         <Dialog>
           <DialogTrigger asChild>
-            <Button variant="ghost" size="sm">Swap</Button>
+            <Button variant="ghost" size="sm" className="rounded-full">Swap</Button>
           </DialogTrigger>
           <SwapDialog/>
         </Dialog>
         <Link href="/cryptocurrencies">
-          <Button variant="ghost" size="sm">
+          <Button variant="ghost" size="sm" className="rounded-full">
             Cryptocurrencies
           </Button>
         </Link>
-        <Button variant="ghost" size="sm">
+        <Button variant="ghost" size="sm" className="rounded-full">
           Pricing
         </Button>
         <Dialog open={isGridDialogOpen} onOpenChange={setIsGridDialogOpen}>
           <DialogTrigger asChild>
-            <Button variant="ghost" size="sm">
+            <Button variant="ghost" size="sm" className="rounded-full">
               <Grid className="h-4 w-4"/>
             </Button>
           </DialogTrigger>
@@ -269,10 +269,10 @@ const Header = () => {
             <DropdownMenuItem>Sign out</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-        <Button variant="outline" size="sm">
+        <Button variant="outline" size="sm" className="rounded-full">
           Login
         </Button>
-        <Button size="sm">Get Started</Button>
+        <Button size="sm" className="rounded-full">Get Started</Button>
         <Avatar className="h-8 w-8">
           <AvatarImage src="https://picsum.photos/48/48" alt="Avatar" />
           <AvatarFallback>CN</AvatarFallback>
