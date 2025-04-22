@@ -42,7 +42,6 @@ const Header = () => {
   const toggleTheme = useCallback(() => {
     const newTheme = isDarkMode ? "light" : "dark";
     setTheme(newTheme);
-    setIsDarkMode(!isDarkMode);
   }, [isDarkMode, setTheme]);
 
   return (
@@ -133,9 +132,7 @@ const Header = () => {
                       ))}
                     </>
                   ) : null}
-                </SelectContent>
-              </Select>
-            </DropdownMenuItem>
+                </SelectMenuItem>
             <DropdownMenuItem>Appearance</DropdownMenuItem>
             <DropdownMenuItem>Sign out</DropdownMenuItem>
           </DropdownMenuContent>
