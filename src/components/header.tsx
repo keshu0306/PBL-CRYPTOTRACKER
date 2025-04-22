@@ -16,6 +16,10 @@ import {useTheme} from 'next-themes';
 import {SunIcon, MoonIcon} from '@radix-ui/react-icons';
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from '@/components/ui/select';
 import SwapDialog from "@/components/swap-dialog";
+import {
+  Dialog,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const Header = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -74,7 +78,12 @@ const Header = () => {
         <Button variant="ghost" size="sm">
           Portfolio Tracker
         </Button>
-        <SwapDialog/>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button variant="ghost" size="sm">Swap</Button>
+          </DialogTrigger>
+          <SwapDialog/>
+        </Dialog>
         <Button variant="ghost" size="sm">
           Cryptocurrencies
         </Button>
