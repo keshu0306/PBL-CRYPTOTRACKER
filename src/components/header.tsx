@@ -5,6 +5,7 @@ import { Search, Settings } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Input } from '@/components/ui/input';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 
 const Header = () => {
   return (
@@ -32,7 +33,25 @@ const Header = () => {
 
       {/* User Authentication */}
       <div className="flex items-center space-x-4">
-        <Settings className="h-5 w-5 text-muted-foreground" />
+        <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="h-8 w-8 p-0 rounded-full">
+                  <Settings className="h-5 w-5 text-muted-foreground" />
+                  <span className="sr-only">Open user menu</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem>
+                  Profile
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  Appearance
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  Sign out
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
         <Button variant="outline" size="sm">Login</Button>
         <Button size="sm">Get Started</Button>
           <Avatar className="h-8 w-8">
