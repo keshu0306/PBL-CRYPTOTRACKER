@@ -100,7 +100,7 @@ const Header = () => {
           </DropdownMenuTrigger>
           <DropdownMenuContent className="backdrop-blur-xl bg-secondary/80">
             <DropdownMenuItem>Profile</DropdownMenuItem>
-             <DropdownMenuItem className="flex items-center justify-between" onSelect={(e) => e.preventDefault()}>
+             <DropdownMenuItem className="flex items-center justify-between">
               Theme
               {mounted ? (
                 <Switch checked={isDarkMode} onCheckedChange={toggleTheme} />
