@@ -224,7 +224,10 @@ const Header = () => {
                   <Switch
                     id="theme-switch"
                     checked={theme === 'dark'}
-                    onCheckedChange={handleThemeToggle}
+                    onCheckedChange={(checked) => {
+                      handleThemeToggle(checked);
+                      setOpen(false); // Keep the settings open after theme change
+                    }}
                   />
                 </label>
               ) : null}
@@ -280,3 +283,4 @@ const Header = () => {
 };
 
 export default Header;
+
