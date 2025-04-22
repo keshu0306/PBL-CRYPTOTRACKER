@@ -74,26 +74,26 @@ const Header = () => {
 
       {/* Navigation Links */}
       <nav className="flex items-center space-x-4">
-        <Button variant="ghost" size="sm" className="rounded-full">
+        <Button variant="ghost" size="sm" className="rounded-full hover:bg-yellow-500 hover:text-gray-900">
           Portfolio Tracker
         </Button>
         <Dialog>
           <DialogTrigger asChild>
-            <Button variant="ghost" size="sm" className="rounded-full">Swap</Button>
+            <Button variant="ghost" size="sm" className="rounded-full hover:bg-yellow-500 hover:text-gray-900">Swap</Button>
           </DialogTrigger>
           <SwapDialog/>
         </Dialog>
         <Link href="/cryptocurrencies">
-          <Button variant="ghost" size="sm" className="rounded-full">
+          <Button variant="ghost" size="sm" className="rounded-full hover:bg-yellow-500 hover:text-gray-900">
             Cryptocurrencies
           </Button>
         </Link>
-        <Button variant="ghost" size="sm" className="rounded-full">
+        <Button variant="ghost" size="sm" className="rounded-full hover:bg-yellow-500 hover:text-gray-900">
           Pricing
         </Button>
         <Dialog open={isGridDialogOpen} onOpenChange={setIsGridDialogOpen}>
           <DialogTrigger asChild>
-            <Button variant="ghost" size="sm" className="rounded-full">
+            <Button variant="ghost" size="sm" className="rounded-full hover:bg-yellow-500 hover:text-gray-900">
               <Grid className="h-4 w-4"/>
             </Button>
           </DialogTrigger>
