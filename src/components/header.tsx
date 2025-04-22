@@ -28,18 +28,21 @@ const Header = () => {
   const [language, setLanguage] = useState('English');
   const [currency, setCurrency] = useState('USD');
   const [open, setOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
+  useEffect(() => {
+    setIsDarkMode(theme === "dark");
+  }, [theme]);
 
-  //const isDarkMode = theme === 'dark';
-  const isDarkMode = theme === "dark";
 
   const toggleTheme = useCallback(() => {
     const newTheme = isDarkMode ? "light" : "dark";
     setTheme(newTheme);
+    setIsDarkMode(!isDarkMode);
   }, [isDarkMode, setTheme]);
 
   return (
