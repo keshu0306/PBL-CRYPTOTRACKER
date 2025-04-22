@@ -144,7 +144,6 @@ const Header = () => {
                 </SelectContent>
               </Select>
             </DropdownMenuItem>
-            <DropdownMenuItem>Appearance</DropdownMenuItem>
             <DropdownMenuItem>Sign out</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
