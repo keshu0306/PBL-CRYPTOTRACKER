@@ -116,7 +116,7 @@ const Header = () => {
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuItem>Profile</DropdownMenuItem>
-            <DropdownMenuItem className="flex items-center justify-between">
+            <DropdownMenuItem className="flex items-center justify-between" onSelect={(e) => e.preventDefault()}>
               Theme
               {mounted ? (
                 <Switch checked={isDarkMode} onCheckedChange={toggleTheme} />
