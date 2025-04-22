@@ -35,8 +35,7 @@ const Header = () => {
   }, []);
 
   const handleThemeToggle = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
+    setTheme(theme === 'light' ? 'dark' : 'light');
   };
 
   return (
@@ -99,7 +98,16 @@ const Header = () => {
              <DropdownMenuItem className="flex items-center justify-between">
               Theme
               {mounted ? (
-                <Switch checked={theme === 'dark'} onCheckedChange={handleThemeToggle} />
+                <label
+                  htmlFor="theme-switch"
+                  className="peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  <Switch
+                    id="theme-switch"
+                    checked={theme === 'dark'}
+                    onCheckedChange={handleThemeToggle}
+                  />
+                </label>
               ) : null}
             </DropdownMenuItem>
             <DropdownMenuItem>
