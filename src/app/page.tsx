@@ -14,17 +14,17 @@ export default function Home() {
 
       <div className="flex justify-center space-x-4 mb-8">
         <div className="flex flex-col items-center">
-          <img src="https://picsum.photos/64/64" alt="Binance" className="rounded-md mb-2"/>
+          <img src="https://assets.coingecko.com/coins/images/1344/small/binance.png?1547034769" alt="Binance" className="w-10 h-10 rounded-md mb-2"/>
           <span className="text-sm">Binance</span>
           <Button variant="outline" size="sm">Connect →</Button>
         </div>
         <div className="flex flex-col items-center">
-          <img src="https://picsum.photos/64/64" alt="MetaMask" className="rounded-md mb-2"/>
+          <img src="https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880" alt="MetaMask" className="w-10 h-10 rounded-md mb-2"/>
           <span className="text-sm">MetaMask</span>
           <Button variant="outline" size="sm">Connect →</Button>
         </div>
         <div className="flex flex-col items-center">
-          <img src="https://picsum.photos/64/64" alt="Coinbase" className="rounded-md mb-2"/>
+          <img src="https://assets.coingecko.com/coins/images/444/small/coinbase-512.png?1618389649" alt="Coinbase" className="w-10 h-10 rounded-md mb-2"/>
           <span className="text-sm">Coinbase (Individ...)</span>
           <Button variant="outline" size="sm">Connect →</Button>
         </div>
