@@ -114,7 +114,7 @@ const Header = () => {
               <span className="sr-only">Open user menu</span>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
+          <DropdownMenuContent className="backdrop-blur-md bg-secondary/70">
             <DropdownMenuItem>Profile</DropdownMenuItem>
             <DropdownMenuItem className="flex items-center justify-between" onSelect={(e) => e.preventDefault()}>
               Theme
