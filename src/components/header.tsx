@@ -19,9 +19,15 @@ import SwapDialog from "@/components/swap-dialog";
 import {
   Dialog,
   DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogClose,
 } from "@/components/ui/dialog";
 import { currencies } from "@/lib/currencies";
 import Link from "next/link";
+import {X} from "lucide-react";
 
 const Header = () => {
   const [mounted, setMounted] = useState(false);
@@ -29,6 +35,7 @@ const Header = () => {
   const [language, setLanguage] = useState('English');
   const [currency, setCurrency] = useState('USD');
   const [open, setOpen] = useState(false);
+  const [isGridDialogOpen, setIsGridDialogOpen] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -69,9 +76,19 @@ const Header = () => {
         <Button variant="ghost" size="sm">
           Pricing
         </Button>
-        <Button variant="ghost" size="sm">
-          <Grid className="h-4 w-4"/>
-        </Button>
+        <Dialog open={isGridDialogOpen} onOpenChange={setIsGridDialogOpen}>
+          <DialogTrigger asChild>
+            <Button variant="ghost" size="sm">
+              <Grid className="h-4 w-4"/>
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-[425px] backdrop-blur-xl bg-secondary/80 border">
+            <DialogHeader>
+              <DialogTitle>More Options</DialogTitle>
+              <DialogDescription>This feature is under development.</DialogDescription>
+            </DialogHeader>
+          </DialogContent>
+        </Dialog>
       </nav>
 
       {/* Search Bar */}
