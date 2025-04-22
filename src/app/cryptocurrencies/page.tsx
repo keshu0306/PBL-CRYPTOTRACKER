@@ -12,9 +12,11 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import {SparklineChart} from "@/components/sparkline-chart";
+import {useRouter} from "next/navigation";
 
 export default function CryptocurrenciesPage() {
   const [cryptocurrencies, setCryptocurrencies] = useState([]);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchCryptocurrencies = async () => {
@@ -28,6 +30,11 @@ export default function CryptocurrenciesPage() {
     };
 
     fetchCryptocurrencies();
+
+    // Set up interval to refetch data every, for example, 60 seconds
+    const intervalId = setInterval(fetchCryptocurrencies, 60000);
+
+    return () => clearInterval(intervalId); // Clean up interval on unmount
   }, []);
 
   return (
@@ -72,7 +79,7 @@ export default function CryptocurrenciesPage() {
           </TableHeader>
           <TableBody>
             {cryptocurrencies.map((crypto, index) => (
-              <TableRow key={crypto.id}>
+              <TableRow key={crypto.id} onClick={() => router.push(`/cryptocurrencies/${crypto.id}`)} className="cursor-pointer">
                 <TableCell className="font-medium">{index + 1}</TableCell>
                 <TableCell>
                   <div className="flex items-center space-x-2">
