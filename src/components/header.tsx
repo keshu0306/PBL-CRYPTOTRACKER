@@ -29,24 +29,14 @@ const Header = () => {
   const [language, setLanguage] = useState('English');
   const [currency, setCurrency] = useState('USD');
   const [open, setOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  useEffect(() => {
-    setIsDarkMode(theme === "dark");
-  }, [theme]);
-
-
-  const toggleTheme = useCallback(() => {
-    setTheme(isDarkMode ? "light" : "dark");
-  }, [isDarkMode, setTheme]);
-
-  const handleThemeToggle = useCallback(() => {
-    toggleTheme();
-  }, [toggleTheme]);
+  const handleThemeToggle = () => {
+    setTheme(theme === 'light' ? 'dark' : 'light');
+  };
 
   return (
     <header className="bg-header-background text-header-foreground py-3 px-6 flex items-center justify-between sticky top-0 z-50">
@@ -108,7 +98,7 @@ const Header = () => {
              <DropdownMenuItem className="flex items-center justify-between">
               Theme
               {mounted ? (
-                <Switch checked={isDarkMode} onCheckedChange={handleThemeToggle} />
+                <Switch checked={theme === 'dark'} onCheckedChange={handleThemeToggle} />
               ) : null}
             </DropdownMenuItem>
             <DropdownMenuItem>
@@ -118,9 +108,13 @@ const Header = () => {
                   <SelectValue placeholder="Language" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="English">English</SelectItem>
-                  <SelectItem value="Spanish">Spanish</SelectItem>
-                  <SelectItem value="French">French</SelectItem>
+                  {mounted ? (
+                    <>
+                      {currencies.map((currency) => (
+                        <SelectItem key={currency.code} value={currency.code}>{currency.name} ({currency.symbol})</SelectItem>
+                      ))}
+                    </>
+                  ) : null}
                 </SelectContent>
               </Select>
             </DropdownMenuItem>
