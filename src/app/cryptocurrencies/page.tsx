@@ -15,7 +15,7 @@ import {SparklineChart} from "@/components/sparkline-chart";
 import {useRouter} from "next/navigation";
 import {formatMarketCap} from "@/lib/utils";
 import {Button} from "@/components/ui/button";
-import {ReloadIcon} from "lucide-react";
+import {RedoIcon} from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -61,12 +61,12 @@ export default function CryptocurrenciesPage() {
         <Button onClick={fetchCryptocurrencies} disabled={isLoading}  className="rounded-full hover:bg-yellow-500 hover:text-gray-900">
           {isLoading ? (
             <>
-              <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+              <RedoIcon className="mr-2 h-4 w-4 animate-spin" />
               Refreshing...
             </>
           ) : (
             <>
-              <ReloadIcon className="mr-2 h-4 w-4" />
+              <RedoIcon className="mr-2 h-4 w-4" />
               Refresh
             </>
           )}
