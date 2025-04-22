@@ -13,6 +13,7 @@ import {useEffect, useState} from "react";
 import {Input} from "@/components/ui/input";
 import {ArrowDown, ArrowUp} from "lucide-react";
 import {useToast} from "@/hooks/use-toast";
+import { currencies } from "@/lib/currencies";
 
 const SwapDialog = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -136,9 +137,9 @@ const SwapDialog = () => {
             <SelectContent>
               {isMounted ? (
                 <>
-                  <SelectItem value="usd">USD</SelectItem>
-                  <SelectItem value="eur">EUR</SelectItem>
-                  <SelectItem value="gbp">GBP</SelectItem>
+                  {currencies.map((currency) => (
+                    <SelectItem key={currency.code} value={currency.code}>{currency.name} ({currency.symbol})</SelectItem>
+                  ))}
                 </>
               ) : null}
             </SelectContent>
@@ -165,9 +166,9 @@ const SwapDialog = () => {
             <SelectContent>
               {isMounted ? (
                 <>
-                  <SelectItem value="usd">USD</SelectItem>
-                  <SelectItem value="eur">EUR</SelectItem>
-                  <SelectItem value="gbp">GBP</SelectItem>
+                  {currencies.map((currency) => (
+                    <SelectItem key={currency.code} value={currency.code}>{currency.name} ({currency.symbol})</SelectItem>
+                  ))}
                 </>
               ) : null}
             </SelectContent>
