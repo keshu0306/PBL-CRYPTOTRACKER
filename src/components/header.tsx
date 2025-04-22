@@ -23,35 +23,24 @@ import {
 import { currencies } from "@/lib/currencies";
 
 const Header = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const {setTheme} = useTheme();
   const [mounted, setMounted] = useState(false);
+  const {setTheme, theme} = useTheme();
   const [language, setLanguage] = useState('English');
   const [currency, setCurrency] = useState('USD');
   const [open, setOpen] = useState(false);
-
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  useEffect(() => {
-    const storedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    let initialDarkMode = storedTheme === 'dark' || (!storedTheme && prefersDark);
 
-    setIsDarkMode(initialDarkMode);
-    if (mounted) {
-      setTheme(initialDarkMode ? 'dark' : 'light');
-    }
-  }, [mounted, setTheme]);
+  //const isDarkMode = theme === 'dark';
+  const isDarkMode = theme === "dark";
 
-  const toggleTheme = useCallback((newMode: boolean) => {
-    setIsDarkMode(newMode);
-    setTheme(newMode ? 'dark' : 'light');
-    localStorage.setItem('theme', newMode ? 'dark' : 'light');
-  }, [setTheme]);
-
+  const toggleTheme = useCallback(() => {
+    const newTheme = isDarkMode ? "light" : "dark";
+    setTheme(newTheme);
+  }, [isDarkMode, setTheme]);
 
   return (
     <header className="bg-header-background text-header-foreground py-3 px-6 flex items-center justify-between sticky top-0 z-50">
@@ -111,7 +100,7 @@ const Header = () => {
              <DropdownMenuItem className="flex items-center justify-between" onSelect={(e) => e.preventDefault()}>
               Theme
               {mounted ? (
-                <Switch checked={isDarkMode} onCheckedChange={(e) => toggleTheme(e.target.checked)} />
+                <Switch checked={isDarkMode} onCheckedChange={toggleTheme} />
               ) : null}
             </DropdownMenuItem>
             <DropdownMenuItem>
