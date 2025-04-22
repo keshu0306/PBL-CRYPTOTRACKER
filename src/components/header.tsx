@@ -34,8 +34,8 @@ const Header = () => {
     setMounted(true);
   }, []);
 
-  const handleThemeToggle = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
+  const handleThemeToggle = (checked: boolean) => {
+    setTheme(checked ? 'dark' : 'light');
   };
 
   return (
