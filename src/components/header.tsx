@@ -1,6 +1,6 @@
 'use client';
 
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {Search, Settings} from 'lucide-react';
 import {Button} from '@/components/ui/button';
 import {Avatar, AvatarFallback, AvatarImage} from '@/components/ui/avatar';
@@ -20,6 +20,7 @@ import {
   Dialog,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { currencies } from "@/lib/currencies";
 
 const Header = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -27,12 +28,14 @@ const Header = () => {
   const [mounted, setMounted] = useState(false);
   const [language, setLanguage] = useState('English');
   const [currency, setCurrency] = useState('USD');
+  const [open, setOpen] = useState(false);
+
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
- useEffect(() => {
+  useEffect(() => {
     const storedTheme = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     let initialDarkMode = storedTheme === 'dark' || (!storedTheme && prefersDark);
@@ -44,12 +47,13 @@ const Header = () => {
     }
   }, [mounted, setTheme]);
 
-  const toggleTheme = (newMode: boolean) => {
+  const toggleTheme = useCallback((newMode: boolean) => {
     setIsDarkMode(newMode);
     setTheme(newMode ? 'dark' : 'light');
     localStorage.setItem('theme', newMode ? 'dark' : 'light');
     document.documentElement.classList.toggle('dark', newMode);
-  };
+  }, [setTheme]);
+
 
   return (
     <header className="bg-header-background text-header-foreground py-3 px-6 flex items-center justify-between sticky top-0 z-50">
@@ -97,7 +101,7 @@ const Header = () => {
 
       {/* User Authentication */}
       <div className="flex items-center space-x-4">
-        <DropdownMenu>
+        <DropdownMenu open={open} onOpenChange={setOpen}>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="h-8 w-8 p-0 rounded-full">
               <Settings className="h-5 w-5 text-muted-foreground" />
@@ -160,4 +164,3 @@ const Header = () => {
 };
 
 export default Header;
-import { currencies } from "@/lib/currencies";
