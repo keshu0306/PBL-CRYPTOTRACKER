@@ -30,6 +30,8 @@ const SwapDialog = () => {
 
   const connectWallet = () => {
     // Placeholder for wallet connection logic
+    // In a real app, this would involve connecting to a web3 provider like Metamask
+    // and checking if the user is already connected.
     setIsConnected(true);
     toast({
       title: "Wallet Connected!",
@@ -64,24 +66,60 @@ const SwapDialog = () => {
     receiveCurrency: string,
     amount: string
   ) => {
+    if (!amount) {
+      setReceiveAmount('');
+      return;
+    }
     // Placeholder for calculation logic based on selected coins and amount
     // In a real app, this would involve fetching exchange rates and performing the calculation
     try {
-      const rate = 0.5; // example of the rate
-      const receive = parseFloat(amount) * rate;
+      // Simulate fetching exchange rate
+      const exchangeRate = await simulateExchangeRate(payCurrency, receiveCurrency);
+      const receive = parseFloat(amount) * exchangeRate;
       setReceiveAmount(receive.toString());
-    } catch (error) {
+      toast({
+        title: "Calculation Done",
+        description: `Calculated amount ${amount} ${payCurrency} to ${receive} ${receiveCurrency}.`,
+      });
+    } catch (error: any) {
       console.error("Error calculating receive amount:", error);
       toast({
         title: "Error",
-        description: "Could not calculate receive amount.",
+        description: `Could not calculate receive amount. ${error.message}`,
         variant: "destructive",
       });
       setReceiveAmount('');
     }
   };
 
-  const handleSwap = () => {
+  // Simulate fetching exchange rate from an external API
+  const simulateExchangeRate = async (payCurrency: string, receiveCurrency: string) => {
+    return new Promise<number>((resolve, reject) => {
+      setTimeout(() => {
+        if (payCurrency === receiveCurrency) {
+          reject(new Error("Cannot swap same currencies."));
+          return;
+        }
+
+        // Simulate different rates for different currencies
+        const rateMap: { [key: string]: { [key: string]: number } } = {
+          'USD': { 'EUR': 0.85, 'GBP': 0.72 },
+          'EUR': { 'USD': 1.18, 'GBP': 0.85 },
+          'GBP': { 'USD': 1.39, 'EUR': 1.18 },
+        };
+
+        const rate = rateMap[payCurrency]?.[receiveCurrency];
+
+        if (rate !== undefined) {
+          resolve(rate);
+        } else {
+          reject(new Error(`Exchange rate not available for ${payCurrency} to ${receiveCurrency}`));
+        }
+      }, 500); // Simulate network delay
+    });
+  };
+
+  const handleSwap = async () => {
     // Placeholder for swap logic
     if (!isConnected) {
       toast({
@@ -101,10 +139,50 @@ const SwapDialog = () => {
       return;
     }
 
-    // Perform swap
-    toast({
-      title: "Swap Successful!",
-      description: `Swapped ${payAmount} ${payCoin} for ${receiveAmount} ${receiveCoin}.`,
+    if (parseFloat(payAmount) <= 0) {
+      toast({
+        title: "Invalid Amount",
+        description: "Please enter a valid amount to pay.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    try {
+      // Simulate the swap operation
+      await simulateSwap(payCoin, receiveCoin, parseFloat(payAmount), parseFloat(receiveAmount));
+
+      toast({
+        title: "Swap Successful!",
+        description: `Swapped ${payAmount} ${payCoin} for ${receiveAmount} ${receiveCoin}.`,
+      });
+    } catch (error: any) {
+      console.error("Swap failed:", error);
+      toast({
+        title: "Swap Failed",
+        description: `Failed to complete the swap. ${error.message}`,
+        variant: "destructive",
+      });
+    }
+  };
+
+  // Simulate the actual swap operation
+  const simulateSwap = async (
+    payCurrency: string,
+    receiveCurrency: string,
+    payAmount: number,
+    receiveAmount: number
+  ) => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        // Simulate success or failure
+        const success = Math.random() > 0.1; // 90% chance of success
+        if (success) {
+          resolve(true);
+        } else {
+          reject(new Error("Simulated swap failed due to slippage or insufficient liquidity."));
+        }
+      }, 1000); // Simulate network delay
     });
   };
 
