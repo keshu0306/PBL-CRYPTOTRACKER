@@ -68,7 +68,7 @@ const Header = () => {
           className="rounded-full"
         />
         <Link href="/" className="font-bold text-xl">
-          CryptoFolio
+          Crypto Tracker
         </Link>
       </div>
 
