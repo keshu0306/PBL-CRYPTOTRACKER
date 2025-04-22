@@ -74,23 +74,23 @@ const Header = () => {
 
       {/* Navigation Links */}
       <nav className="flex items-center space-x-4">
-        <Button variant="ghost" size="sm" className="rounded-full hover:bg-yellow-500 hover:text-gray-900">
+        <Button variant="ghost" size="sm" className="rounded-full">
           Portfolio Tracker
         </Button>
         <Dialog>
           <DialogTrigger asChild>
-            <Button variant="ghost" size="sm" className="rounded-full hover:bg-yellow-500 hover:text-gray-900">Swap</Button>
+            <Button variant="ghost" size="sm" className="rounded-full">Swap</Button>
           </DialogTrigger>
           <SwapDialog/>
         </Dialog>
         <Link href="/cryptocurrencies">
-          <Button variant="ghost" size="sm" className="rounded-full hover:bg-yellow-500 hover:text-gray-900">
+          <Button variant="ghost" size="sm" className="rounded-full">
             Cryptocurrencies
           </Button>
         </Link>
         <Dialog open={isGridDialogOpen} onOpenChange={setIsGridDialogOpen}>
           <DialogTrigger asChild>
-            <Button variant="ghost" size="sm" className="h-8 w-8 rounded-full hover:bg-yellow-500 hover:text-gray-900">
+            <Button variant="ghost" size="sm" className="h-8 w-8 rounded-full">
               <Grid className="h-4 w-4"/>
             </Button>
           </DialogTrigger>
@@ -207,7 +207,7 @@ const Header = () => {
       <div className="flex items-center space-x-4">
         <DropdownMenu open={open} onOpenChange={setOpen}>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0 rounded-full hover:bg-yellow-500 hover:text-gray-900">
+            <Button variant="ghost" className="h-8 w-8 p-0 rounded-full">
               <Settings className="h-5 w-5 text-muted-foreground" />
               <span className="sr-only">Open user menu</span>
             </Button>
@@ -283,4 +283,3 @@ const Header = () => {
 };
 
 export default Header;
-
