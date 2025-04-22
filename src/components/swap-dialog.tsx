@@ -187,7 +187,7 @@ const SwapDialog = () => {
   };
 
   return (
-    <DialogContent className="sm:max-w-[425px] backdrop-blur-md bg-secondary/90 border">
+    <DialogContent className="sm:max-w-[425px] backdrop-blur-xl bg-secondary/70 border">
       <DialogHeader>
         <DialogTitle>Swap</DialogTitle>
       </DialogHeader>
