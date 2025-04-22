@@ -28,6 +28,19 @@ import {
 import { currencies } from "@/lib/currencies";
 import Link from "next/link";
 import {X} from "lucide-react";
+import {
+  LucideIcon,
+  LayoutDashboard,
+  File,
+  ListOrdered,
+  LineChart,
+  BarChart3,
+  Newspaper,
+  Blocks,
+  Code2,
+  Download,
+  Lock,
+} from "lucide-react";
 
 const Header = () => {
   const [mounted, setMounted] = useState(false);
@@ -82,11 +95,101 @@ const Header = () => {
               <Grid className="h-4 w-4"/>
             </Button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px] backdrop-blur-xl bg-secondary/80 border">
+          <DialogContent className="sm:max-w-[900px] backdrop-blur-xl bg-secondary/80 border">
             <DialogHeader>
               <DialogTitle>More Options</DialogTitle>
-              <DialogDescription>This feature is under development.</DialogDescription>
+              <DialogDescription>Explore additional features and options.</DialogDescription>
             </DialogHeader>
+            <div className="grid grid-cols-2 gap-4 py-4">
+              {/* Products Section */}
+              <div>
+                <h3 className="text-lg font-semibold mb-2">Products</h3>
+                <ul>
+                  <li className="flex items-start space-x-2 py-2">
+                    <LayoutDashboard className="h-5 w-5 mt-1 text-muted-foreground" />
+                    <div>
+                      <a href="#" className="font-medium hover:underline">Integrations</a>
+                      <p className="text-sm text-muted-foreground">Over 300 platforms supported. Choose your preferred crypto platform and connect.</p>
+                    </div>
+                  </li>
+                  <li className="flex items-start space-x-2 py-2">
+                    <File className="h-5 w-5 mt-1 text-muted-foreground" />
+                    <div>
+                      <a href="#" className="font-medium hover:underline">Earn</a>
+                      <p className="text-sm text-muted-foreground">Don't just hodl. Earn 20% on your crypto.</p>
+                    </div>
+                  </li>
+                  <li className="flex items-start space-x-2 py-2">
+                    <ListOrdered className="h-5 w-5 mt-1 text-muted-foreground" />
+                    <div>
+                      <a href="#" className="font-medium hover:underline">NFT</a>
+                      <p className="text-sm text-muted-foreground">Track your entire NFT collection right where you track your other crypto assets.</p>
+                    </div>
+                  </li>
+                  <li className="flex items-start space-x-2 py-2">
+                    <LineChart className="h-5 w-5 mt-1 text-muted-foreground" />
+                    <div>
+                      <a href="#" className="font-medium hover:underline">DeFi Portfolio Tracker</a>
+                      <p className="text-sm text-muted-foreground">Track more than 90 DeFi wallets across 10 different networks.</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Other Section */}
+              <div>
+                <h3 className="text-lg font-semibold mb-2">Other</h3>
+                <ul>
+                  <li className="flex items-start space-x-2 py-2">
+                    <Newspaper className="h-5 w-5 mt-1 text-muted-foreground" />
+                    <div>
+                      <a href="#" className="font-medium hover:underline">News</a>
+                      <p className="text-sm text-muted-foreground">Read the latest crypto news & make better investing decisions.</p>
+                    </div>
+                  </li>
+                  <li className="flex items-start space-x-2 py-2">
+                    <Blocks className="h-5 w-5 mt-1 text-muted-foreground" />
+                    <div>
+                      <a href="#" className="font-medium hover:underline">Blog</a>
+                      <p className="text-sm text-muted-foreground">Learn everything you need to know about the crypto world — in one place.</p>
+                    </div>
+                  </li>
+                  <li className="flex items-start space-x-2 py-2">
+                    <BarChart3 className="h-5 w-5 mt-1 text-muted-foreground" />
+                    <div>
+                      <a href="#" className="font-medium hover:underline">Widgets</a>
+                      <p className="text-sm text-muted-foreground">Set up and add our widgets to your website and attract visitors.</p>
+                    </div>
+                  </li>
+                   <li className="flex items-start space-x-2 py-2">
+                    <Code2 className="h-5 w-5 mt-1 text-muted-foreground" />
+                    <div>
+                      <a href="#" className="font-medium hover:underline">Open API</a>
+                      <p className="text-sm text-muted-foreground">Start integrating CoinStats Public APIs into your applications.</p>
+                    </div>
+                  </li>
+                  <li className="flex items-start space-x-2 py-2">
+                    <Download className="h-5 w-5 mt-1 text-muted-foreground" />
+                    <div>
+                      <a href="#" className="font-medium hover:underline">24h Report</a>
+                      <a href="#" className="font-medium hover:underline">Press Kit</a>
+                      <a href="#" className="font-medium hover:underline">API Docs</a>
+                      {/* Add App Store and Google Play buttons here */}
+                      <a href="#" className="block mt-2"><img src="https://picsum.photos/50/20" alt="App Store" /></a>
+                      <a href="#" className="block mt-1"><img src="https://picsum.photos/50/20" alt="Google Play" /></a>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Industry Best Practices Section */}
+            <div className="text-center py-4">
+              <Lock className="mx-auto h-6 w-6 text-muted-foreground" />
+              <h3 className="text-lg font-semibold mt-2">Industry Best Practices</h3>
+              <p className="text-sm text-muted-foreground">We take the most advanced security measures to ensure that your account is as safe as possible.</p>
+              <Button variant="secondary" className="mt-4">Start Free Trial</Button>
+            </div>
           </DialogContent>
         </Dialog>
       </nav>
