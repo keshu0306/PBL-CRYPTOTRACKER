@@ -45,6 +45,15 @@ const Header = () => {
                   Profile
                 </DropdownMenuItem>
                 <DropdownMenuItem>
+                  Theme
+                </DropdownMenuItem>
+                 <DropdownMenuItem>
+                  Language
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  Currency
+                </DropdownMenuItem>
+                <DropdownMenuItem>
                   Appearance
                 </DropdownMenuItem>
                 <DropdownMenuItem>
@@ -64,3 +73,6 @@ const Header = () => {
 };
 
 export default Header;
+
+
+    
