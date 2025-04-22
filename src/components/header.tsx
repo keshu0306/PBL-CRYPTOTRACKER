@@ -33,32 +33,20 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
-    // On page load or when changing themes, best to add inline in `app.js`
-    if (
-      localStorage.theme === 'dark' ||
-      (!('theme' in localStorage) &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches)
-    ) {
-      document.documentElement.classList.add('dark');
-      setIsDarkMode(true);
-    } else {
-      document.documentElement.classList.remove('dark');
-      setIsDarkMode(false);
-    }
+    const storedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const initialDarkMode = storedTheme === 'dark' || (!storedTheme && prefersDark);
+
+    setIsDarkMode(initialDarkMode);
+    document.documentElement.classList.toggle('dark', initialDarkMode);
   }, []);
 
   const toggleTheme = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIsDarkMode(prevMode => {
-      const newMode = !prevMode;
-      if (newMode) {
-        setTheme('dark');
-        localStorage.theme = 'dark';
-      } else {
-        setTheme('light');
-        localStorage.theme = 'light';
-      }
-      return newMode;
-    });
+    const newMode = e.target.checked;
+    setIsDarkMode(newMode);
+    setTheme(newMode ? 'dark' : 'light');
+    localStorage.setItem('theme', newMode ? 'dark' : 'light');
+    document.documentElement.classList.toggle('dark', newMode);
   };
 
   return (
@@ -114,7 +102,7 @@ const Header = () => {
               <span className="sr-only">Open user menu</span>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="backdrop-blur-xl bg-secondary/70">
+          <DropdownMenuContent className="backdrop-blur-xl bg-secondary/80">
             <DropdownMenuItem>Profile</DropdownMenuItem>
             <DropdownMenuItem className="flex items-center justify-between" onSelect={(e) => e.preventDefault()}>
               Theme
