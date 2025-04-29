@@ -13,7 +13,6 @@ import {
 } from '@/components/ui/dropdown-menu';
 import {Switch} from '@/components/ui/switch';
 import {useTheme} from 'next-themes';
-import {SunIcon, MoonIcon} from '@radix-ui/react-icons';
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from '@/components/ui/select';
 import SwapDialog from "@/components/swap-dialog";
 import {
@@ -41,6 +40,7 @@ import {
   Download,
   Lock,
 } from "lucide-react";
+import LoginDialog from "@/components/auth/login-dialog"; // Import the LoginDialog component
 
 const Header = () => {
   const [mounted, setMounted] = useState(false);
@@ -49,6 +49,7 @@ const Header = () => {
   const [currency, setCurrency] = useState('USD');
   const [open, setOpen] = useState(false);
   const [isGridDialogOpen, setIsGridDialogOpen] = useState(false);
+  const [isLoginDialogOpen, setIsLoginDialogOpen] = useState(false); // State for login dialog
 
   useEffect(() => {
     setMounted(true);
@@ -74,27 +75,27 @@ const Header = () => {
 
       {/* Navigation Links */}
       <nav className="flex items-center space-x-4">
-        <Button variant="ghost" size="sm" className="rounded-full">
+        <Button variant="ghost" size="sm" className="rounded-full hover:bg-yellow-500 hover:text-gray-900">
           Portfolio Tracker
         </Button>
         <Dialog>
           <DialogTrigger asChild>
-            <Button variant="ghost" size="sm" className="rounded-full">Swap</Button>
+            <Button variant="ghost" size="sm" className="rounded-full hover:bg-yellow-500 hover:text-gray-900">Swap</Button>
           </DialogTrigger>
           <SwapDialog/>
         </Dialog>
         <Link href="/cryptocurrencies">
-          <Button variant="ghost" size="sm" className="rounded-full">
+          <Button variant="ghost" size="sm" className="rounded-full hover:bg-yellow-500 hover:text-gray-900">
             Cryptocurrencies
           </Button>
         </Link>
         <Dialog open={isGridDialogOpen} onOpenChange={setIsGridDialogOpen}>
           <DialogTrigger asChild>
-            <Button variant="ghost" size="sm" className="h-8 w-8 rounded-full">
+            <Button variant="ghost" size="sm" className="h-8 w-8 rounded-full hover:bg-yellow-500 hover:text-gray-900">
               <Grid className="h-4 w-4"/>
             </Button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-[900px] backdrop-blur-xl bg-secondary/80 border">
+          <DialogContent className="sm:max-w-[900px] backdrop-blur-xl bg-secondary/90 border">
             <DialogHeader>
               <DialogTitle>More Options</DialogTitle>
               <DialogDescription>Explore additional features and options.</DialogDescription>
@@ -207,14 +208,14 @@ const Header = () => {
       <div className="flex items-center space-x-4">
         <DropdownMenu open={open} onOpenChange={setOpen}>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0 rounded-full">
+            <Button variant="ghost" className="h-8 w-8 p-0 rounded-full hover:bg-yellow-500 hover:text-gray-900">
               <Settings className="h-5 w-5 text-muted-foreground" />
               <span className="sr-only">Open user menu</span>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="backdrop-blur-xl bg-secondary/80">
-            <DropdownMenuItem>Profile</DropdownMenuItem>
-             <DropdownMenuItem className="flex items-center justify-between">
+          <DropdownMenuContent className="backdrop-blur-xl bg-secondary/90 border rounded-md">
+            <DropdownMenuItem className="hover:bg-yellow-500 hover:text-gray-900 rounded-md">Profile</DropdownMenuItem>
+             <DropdownMenuItem className="flex items-center justify-between hover:bg-yellow-500 hover:text-gray-900 rounded-md">
               Theme
               {mounted ? (
                 <label
@@ -226,52 +227,59 @@ const Header = () => {
                     checked={theme === 'dark'}
                     onCheckedChange={(checked) => {
                       handleThemeToggle(checked);
-                      setOpen(false); // Keep the settings open after theme change
                     }}
                   />
                 </label>
               ) : null}
             </DropdownMenuItem>
-            <DropdownMenuItem>
+            <DropdownMenuItem className="hover:bg-yellow-500 hover:text-gray-900 rounded-md">
               Language
               <Select value={language} onValueChange={setLanguage}>
-                <SelectTrigger className="w-[180px]">
+                <SelectTrigger className="w-[180px] rounded-md">
                   <SelectValue placeholder="Language" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="rounded-md">
                   {mounted ? (
                     <>
                       {currencies.sort((a, b) => a.name.localeCompare(b.name)).map((currency) => (
-                        <SelectItem key={currency.code} value={currency.code}>{currency.name} ({currency.symbol})</SelectItem>
+                        <SelectItem key={currency.code} value={currency.code} className="rounded-md">{currency.name} ({currency.symbol})</SelectItem>
                       ))}
                     </>
                   ) : null}
                 </SelectContent>
               </Select>
             </DropdownMenuItem>
-            <DropdownMenuItem>
+            <DropdownMenuItem className="hover:bg-yellow-500 hover:text-gray-900 rounded-md">
               Currency
               <Select value={currency} onValueChange={setCurrency}>
-                <SelectTrigger className="w-[180px]">
+                <SelectTrigger className="w-[180px] rounded-md">
                   <SelectValue placeholder="Currency" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="rounded-md">
                   {mounted ? (
                     <>
                       {currencies.sort((a, b) => a.name.localeCompare(b.name)).map((currency) => (
-                        <SelectItem key={currency.code} value={currency.code}>{currency.name} ({currency.symbol})</SelectItem>
+                        <SelectItem key={currency.code} value={currency.code} className="rounded-md">{currency.name} ({currency.symbol})</SelectItem>
                       ))}
                     </>
                   ) : null}
                 </SelectContent>
               </Select>
             </DropdownMenuItem>
-            <DropdownMenuItem>Sign out</DropdownMenuItem>
+            <DropdownMenuItem className="hover:bg-yellow-500 hover:text-gray-900 rounded-md">Sign out</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-        <Button variant="outline" size="sm" className="rounded-full">
-          Login
-        </Button>
+
+        {/* Login Button with Dialog Trigger */}
+        <Dialog open={isLoginDialogOpen} onOpenChange={setIsLoginDialogOpen}>
+          <DialogTrigger asChild>
+            <Button variant="outline" size="sm" className="rounded-full hover:bg-yellow-500 hover:text-gray-900">
+              Login
+            </Button>
+          </DialogTrigger>
+          <LoginDialog />
+        </Dialog>
+
         <Button size="sm" className="rounded-full">Get Started</Button>
         <Avatar className="h-8 w-8">
           <AvatarImage src="https://picsum.photos/48/48" alt="Avatar" />
