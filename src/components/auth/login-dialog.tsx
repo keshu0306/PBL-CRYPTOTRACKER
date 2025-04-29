@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState } from 'react';
@@ -91,7 +90,7 @@ const LoginDialog: React.FC<LoginDialogProps> = ({ defaultTab = 'login', onOpenC
 
   return (
     // Added default padding back, removed p-0
-    <DialogContent className="sm:max-w-[425px] backdrop-blur-xl bg-secondary/90 border rounded-md">
+    <DialogContent className="sm:max-w-[400px] backdrop-blur-xl bg-secondary/90 border rounded-md">
        {/* Removed the redundant DialogClose component here */}
 
       <Tabs defaultValue={defaultTab} className="w-full">
