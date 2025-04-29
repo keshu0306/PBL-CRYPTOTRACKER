@@ -92,11 +92,7 @@ const LoginDialog: React.FC<LoginDialogProps> = ({ defaultTab = 'login', onOpenC
   return (
     // Added default padding back, removed p-0
     <DialogContent className="sm:max-w-[425px] backdrop-blur-xl bg-secondary/90 border rounded-md">
-       <DialogClose className="absolute right-4 top-4 rounded-full p-1 opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
-          {/* Added transition */}
-         <X className="h-4 w-4 transition-transform duration-200 hover:rotate-90" />
-         <span className="sr-only">Close</span>
-       </DialogClose>
+       {/* Removed the redundant DialogClose component here */}
 
       <Tabs defaultValue={defaultTab} className="w-full">
          {/* Adjusted padding for TabsList */}
@@ -109,7 +105,8 @@ const LoginDialog: React.FC<LoginDialogProps> = ({ defaultTab = 'login', onOpenC
         <TabsContent value="login" className="px-6 pb-6 pt-0">
           <form onSubmit={handleLogin}>
             <div className="grid gap-4 py-4">
-              <div className="grid gap-1">
+              {/* Increased gap here */}
+              <div className="grid gap-2">
                 <Label htmlFor="email-login">Email or Username</Label>
                 <Input
                   id="email-login"
@@ -119,7 +116,8 @@ const LoginDialog: React.FC<LoginDialogProps> = ({ defaultTab = 'login', onOpenC
                   required
                 />
               </div>
-              <div className="grid gap-1">
+               {/* Increased gap here */}
+              <div className="grid gap-2">
                 <div className="flex items-center justify-between">
                   <Label htmlFor="password-login">Password</Label>
                   <Button variant="link" type="button" className="p-0 h-auto text-xs">
@@ -174,7 +172,8 @@ const LoginDialog: React.FC<LoginDialogProps> = ({ defaultTab = 'login', onOpenC
         <TabsContent value="signup" className="px-6 pb-6 pt-0">
            <form onSubmit={handleSignup}>
              <div className="grid gap-4 py-4">
-               <div className="grid gap-1">
+                {/* Increased gap here */}
+               <div className="grid gap-2">
                  <Label htmlFor="email-signup">Email</Label>
                  <Input
                    id="email-signup"
@@ -184,7 +183,8 @@ const LoginDialog: React.FC<LoginDialogProps> = ({ defaultTab = 'login', onOpenC
                    required
                  />
                </div>
-               <div className="grid gap-1">
+                {/* Increased gap here */}
+               <div className="grid gap-2">
                  <Label htmlFor="password-signup">Password</Label>
                   <div className="relative group"> {/* Added group for icon transition */}
                    <Input
@@ -208,7 +208,8 @@ const LoginDialog: React.FC<LoginDialogProps> = ({ defaultTab = 'login', onOpenC
                   </div>
                   <p className="text-xs text-muted-foreground">Use 8 or more characters with a mix of letters, numbers & symbols.</p>
                </div>
-               <div className="grid gap-1">
+                {/* Increased gap here */}
+               <div className="grid gap-2">
                  <Label htmlFor="confirm-password-signup">Confirm Password</Label>
                  <Input
                    id="confirm-password-signup"
