@@ -61,12 +61,14 @@ export default function CryptocurrenciesPage() {
         <Button onClick={fetchCryptocurrencies} disabled={isLoading}  className="rounded-full hover:bg-yellow-500 hover:text-gray-900">
           {isLoading ? (
             <>
-              <RedoIcon className="mr-2 h-4 w-4 animate-spin" />
+              {/* Added animate-spin and transition */}
+              <RedoIcon className="mr-2 h-4 w-4 animate-spin transition-transform duration-200" />
               Refreshing...
             </>
           ) : (
             <>
-              <RedoIcon className="mr-2 h-4 w-4" />
+             {/* Added transition */}
+              <RedoIcon className="mr-2 h-4 w-4 transition-transform duration-200 group-hover:rotate-90" />
               Refresh
             </>
           )}
@@ -78,15 +80,15 @@ export default function CryptocurrenciesPage() {
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-        <div className="bg-secondary rounded-lg p-4">
+        <div className="bg-secondary rounded-lg p-4 transition-transform duration-200 hover:scale-105">
           <h2 className="text-lg font-semibold">Market Cap</h2>
           <p className="text-2xl font-bold">$2,859,030,737,088 <span className="text-green-500">▲ 0.35%</span></p>
         </div>
-        <div className="bg-secondary rounded-lg p-4">
+        <div className="bg-secondary rounded-lg p-4 transition-transform duration-200 hover:scale-105">
           <h2 className="text-lg font-semibold">Volume 24h</h2>
           <p className="text-2xl font-bold">$98,703,859,307 <span className="text-green-500">▲ 35.3%</span></p>
         </div>
-        <div className="bg-secondary rounded-lg p-4">
+        <div className="bg-secondary rounded-lg p-4 transition-transform duration-200 hover:scale-105">
           <h2 className="text-lg font-semibold">BTC Dominance</h2>
           <p className="text-2xl font-bold">61.4% <span className="text-green-500">▲ 0.64%</span></p>
         </div>
@@ -112,11 +114,12 @@ export default function CryptocurrenciesPage() {
           </TableHeader>
           <TableBody>
             {cryptocurrencies.map((crypto, index) => (
-              <TableRow key={crypto.id} onClick={() => router.push(`/cryptocurrencies/${crypto.id}`)} className="cursor-pointer">
+              <TableRow key={crypto.id} onClick={() => router.push(`/cryptocurrencies/${crypto.id}`)} className="cursor-pointer transition-colors duration-200 hover:bg-muted/50">
                 <TableCell className="font-medium">{index + 1}</TableCell>
                 <TableCell>
-                  <div className="flex items-center space-x-2">
-                    <img src={crypto.image} alt={crypto.name} className="w-6 h-6 rounded-full"/>
+                  <div className="flex items-center space-x-2 group">
+                     {/* Added transition */}
+                    <img src={crypto.image} alt={crypto.name} className="w-6 h-6 rounded-full transition-transform duration-200 group-hover:scale-110"/>
                     <span>{crypto.name} ({crypto.symbol.toUpperCase()})</span>
                   </div>
                 </TableCell>
@@ -155,4 +158,3 @@ export default function CryptocurrenciesPage() {
     </div>
   );
 }
-

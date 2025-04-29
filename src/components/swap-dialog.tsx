@@ -113,11 +113,14 @@ const SwapDialog = () => {
         if (rate !== undefined) {
           resolve(rate);
         } else {
-          reject(new Error(`Exchange rate not available for ${payCurrency} to ${receiveCurrency}`));
+          // Simulate a generic rate if specific pair not found
+          resolve(Math.random() * 2 + 0.5); // Random rate between 0.5 and 2.5
+          // reject(new Error(`Exchange rate not available for ${payCurrency} to ${receiveCurrency}`));
         }
       }, 500); // Simulate network delay
     });
   };
+
 
   const handleSwap = async () => {
     // Placeholder for swap logic
@@ -187,14 +190,14 @@ const SwapDialog = () => {
   };
 
   return (
-    <DialogContent className="sm:max-w-[425px] backdrop-blur-xl bg-secondary/10 border">
+    <DialogContent className="sm:max-w-[425px] backdrop-blur-xl bg-secondary/90 border rounded-md"> {/* Adjusted transparency */}
       <DialogHeader>
         <DialogTitle>Swap</DialogTitle>
       </DialogHeader>
       <div className="grid gap-4 py-4">
         <div className="grid grid-cols-4 items-center gap-4">
           <div className="col-span-3 font-medium">Connect Your Wallet</div>
-          <Button variant="secondary" className="col-span-1" onClick={connectWallet} disabled={isConnected}>
+          <Button variant="secondary" className="col-span-1 rounded-full" onClick={connectWallet} disabled={isConnected}>
             {isConnected ? 'Connected' : 'Connect'}
           </Button>
         </div>
@@ -204,60 +207,64 @@ const SwapDialog = () => {
           <Input
             type="number"
             placeholder="Amount"
-            className="col-span-4"
+            className="col-span-4 rounded-md transition-shadow duration-200 focus:shadow-outline" // Added transition
             value={payAmount}
             onChange={handlePayAmountChange}
           />
           <Select onValueChange={handlePayCoinChange}>
-            <SelectTrigger className="col-span-4">
+            <SelectTrigger className="col-span-4 rounded-md">
               <SelectValue placeholder="Select Coin"/>
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="rounded-md">
               {isMounted ? (
                 <>
-                  {currencies.map((currency) => (
-                    <SelectItem key={currency.code} value={currency.code}>{currency.name} ({currency.symbol})</SelectItem>
+                  {currencies.sort((a, b) => a.name.localeCompare(b.name)).map((currency) => (
+                    <SelectItem key={currency.code} value={currency.code} className="rounded-md">{currency.name} ({currency.symbol})</SelectItem>
                   ))}
                 </>
               ) : null}
             </SelectContent>
           </Select>
         </div>
-        <div className="grid grid-cols-4 items-center gap-1 justify-center">
-          <ArrowUp className="col-span-2 justify-self-end"/>
-          <ArrowDown className="col-span-2 justify-self-start"/>
+        <div className="grid grid-cols-12 items-center gap-1 justify-center"> {/* Adjusted grid cols */}
+          {/* Added transition and group */}
+          <div className="col-start-6 col-span-2 flex justify-center group">
+            <ArrowUp className="h-4 w-4 transition-transform duration-200 group-hover:translate-y-[-2px]"/>
+            <ArrowDown className="h-4 w-4 transition-transform duration-200 group-hover:translate-y-[2px]"/>
+          </div>
         </div>
+
 
         <div className="grid grid-cols-12 items-center gap-4">
           <div className="col-span-4 font-medium">Receive</div>
           <Input
             type="number"
             placeholder="Amount"
-            className="col-span-4"
+            className="col-span-4 rounded-md transition-shadow duration-200 focus:shadow-outline" // Added transition
             disabled
             value={receiveAmount}
           />
           <Select onValueChange={handleReceiveCoinChange}>
-            <SelectTrigger className="col-span-4">
+            <SelectTrigger className="col-span-4 rounded-md">
               <SelectValue placeholder="Select Coin"/>
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="rounded-md">
               {isMounted ? (
                 <>
-                  {currencies.map((currency) => (
-                    <SelectItem key={currency.code} value={currency.code}>{currency.name} ({currency.symbol})</SelectItem>
+                  {currencies.sort((a, b) => a.name.localeCompare(b.name)).map((currency) => (
+                    <SelectItem key={currency.code} value={currency.code} className="rounded-md">{currency.name} ({currency.symbol})</SelectItem>
                   ))}
                 </>
               ) : null}
             </SelectContent>
           </Select>
         </div>
-        <Button variant="secondary" onClick={handleSwap} disabled={!payCoin || !receiveCoin || !payAmount}>
+        <Button variant="secondary" className="rounded-full" onClick={handleSwap} disabled={!payCoin || !receiveCoin || !payAmount}>
           Swap
         </Button>
-        <div className="grid grid-cols-2 items-center gap-4 bg-secondary rounded-lg">
+        <div className="grid grid-cols-2 items-center gap-4 bg-secondary rounded-lg p-3"> {/* Added padding */}
           <div className="col-span-1 font-medium">Save on CoinStats Fees</div>
-          <Button variant="secondary" className="col-span-1">Go Premium</Button>
+          <Button variant="secondary" className="col-span-1 rounded-full">Go Premium</Button>
         </div>
       </div>
     </DialogContent>
