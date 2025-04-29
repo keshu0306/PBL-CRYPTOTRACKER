@@ -51,6 +51,7 @@ const Header = () => {
   const [open, setOpen] = useState(false);
   const [isGridDialogOpen, setIsGridDialogOpen] = useState(false);
   const [isLoginDialogOpen, setIsLoginDialogOpen] = useState(false); // State for login dialog
+  const [isSignupDialogOpen, setIsSignupDialogOpen] = useState(false); // State for signup dialog
 
   useEffect(() => {
     setMounted(true);
@@ -291,10 +292,17 @@ const Header = () => {
               Login
             </Button>
           </DialogTrigger>
-          <LoginDialog />
+          <LoginDialog onOpenChange={setIsLoginDialogOpen} />
         </Dialog>
 
-        <Button size="sm" className="rounded-full">Get Started</Button>
+        {/* Get Started Button with Dialog Trigger for Signup */}
+         <Dialog open={isSignupDialogOpen} onOpenChange={setIsSignupDialogOpen}>
+           <DialogTrigger asChild>
+             <Button size="sm" className="rounded-full">Get Started</Button>
+           </DialogTrigger>
+           <LoginDialog defaultTab="signup" onOpenChange={setIsSignupDialogOpen} />
+         </Dialog>
+
         <Avatar className="h-8 w-8 transition-transform duration-200 hover:scale-110">
           <AvatarImage src="https://picsum.photos/48/48" alt="Avatar" />
           <AvatarFallback>CN</AvatarFallback>

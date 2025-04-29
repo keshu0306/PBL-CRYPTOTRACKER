@@ -46,8 +46,12 @@ const WalletIcon = () => ( // Placeholder for the "Continue with Wallet" icon - 
     </svg>
 );
 
+interface LoginDialogProps {
+  defaultTab?: 'login' | 'signup';
+  onOpenChange?: (open: boolean) => void; // Add onOpenChange prop
+}
 
-const LoginDialog = () => {
+const LoginDialog: React.FC<LoginDialogProps> = ({ defaultTab = 'login', onOpenChange }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   // Placeholder for actual login logic
@@ -55,6 +59,7 @@ const LoginDialog = () => {
     event.preventDefault();
     console.log('Login attempt...');
     // Add Firebase Authentication logic here
+     if (onOpenChange) onOpenChange(false); // Close dialog on submit
   };
 
     // Placeholder for signup logic
@@ -62,22 +67,26 @@ const LoginDialog = () => {
     event.preventDefault();
     console.log('Signup attempt...');
     // Add Firebase Authentication logic here for signup
+     if (onOpenChange) onOpenChange(false); // Close dialog on submit
   };
 
 
   const handleGoogleLogin = () => {
     console.log('Google Login attempt...');
     // Add Firebase Google Auth logic here
+     if (onOpenChange) onOpenChange(false); // Close dialog on social login
   };
 
   const handleWalletLogin = () => {
     console.log('Wallet Login attempt...');
     // Add Wallet connection logic here (e.g., using ethers.js, web3modal)
+     if (onOpenChange) onOpenChange(false); // Close dialog on wallet login
   };
 
    const handleSocialLogin = (provider: string) => {
     console.log(`${provider} Login attempt...`);
     // Add Firebase Social Auth logic here based on provider
+     if (onOpenChange) onOpenChange(false); // Close dialog on social login
   };
 
   return (
@@ -89,7 +98,7 @@ const LoginDialog = () => {
          <span className="sr-only">Close</span>
        </DialogClose>
 
-      <Tabs defaultValue="login" className="w-full">
+      <Tabs defaultValue={defaultTab} className="w-full">
          {/* Adjusted padding for TabsList */}
         <TabsList className="grid w-full grid-cols-2 bg-transparent px-6 pt-6 pb-2">
           <TabsTrigger value="login" className="data-[state=active]:border-b-2 data-[state=active]:border-primary data-[state=active]:text-primary rounded-none pb-2 text-lg font-semibold transition-colors duration-200">Log In</TabsTrigger>
