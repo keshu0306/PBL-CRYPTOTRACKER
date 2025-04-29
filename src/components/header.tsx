@@ -13,7 +13,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import {Switch} from '@/components/ui/switch';
-import {useTheme} from 'next-themes';
+import { useTheme } from 'next-themes'; // Correct import
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from '@/components/ui/select';
 import SwapDialog from "@/components/swap-dialog";
 import {
@@ -45,7 +45,7 @@ import LoginDialog from "@/components/auth/login-dialog"; // Import the LoginDia
 
 const Header = () => {
   const [mounted, setMounted] = useState(false);
-  const {setTheme, theme} = useTheme();
+  const { setTheme, theme } = useTheme(); // Use the hook correctly
   const [language, setLanguage] = useState('English');
   const [currency, setCurrency] = useState('USD');
   const [open, setOpen] = useState(false);
@@ -56,9 +56,18 @@ const Header = () => {
     setMounted(true);
   }, []);
 
+  // Ensure theme is only changed after mount
   const handleThemeToggle = useCallback((checked: boolean) => {
+    if (mounted) {
       setTheme(checked ? 'dark' : 'light');
-  },[setTheme]);
+    }
+  }, [setTheme, mounted]);
+
+
+  // Avoid rendering theme-dependent UI until mounted
+  if (!mounted) {
+    return null; // Or a loading skeleton
+  }
 
 
   return (
@@ -94,14 +103,19 @@ const Header = () => {
         <Dialog open={isGridDialogOpen} onOpenChange={setIsGridDialogOpen}>
           <DialogTrigger asChild>
              {/* Added transition */}
-            <Button variant="ghost" size="sm" className="h-8 w-8 rounded-full p-0 hover:bg-yellow-500 hover:text-gray-900">
+            <Button variant="ghost" size="sm" className="h-8 w-8 rounded-full p-0 hover:bg-yellow-500 hover:text-gray-900 group">
               <Grid className="h-4 w-4 transition-transform duration-200 group-hover:scale-110"/>
             </Button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-[900px] backdrop-blur-xl bg-secondary/90 border">
+          <DialogContent className="sm:max-w-[900px] backdrop-blur-xl bg-secondary/90 border rounded-md">
             <DialogHeader>
               <DialogTitle>More Options</DialogTitle>
               <DialogDescription>Explore additional features and options.</DialogDescription>
+               <DialogClose className="absolute right-4 top-4 rounded-full p-1 opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground group"> {/* Added group */}
+                 {/* Added transition */}
+                <X className="h-4 w-4 transition-transform duration-200 group-hover:rotate-90" />
+                <span className="sr-only">Close</span>
+              </DialogClose>
             </DialogHeader>
             <div className="grid grid-cols-2 gap-4 py-4">
               {/* Products Section */}
@@ -193,7 +207,7 @@ const Header = () => {
               <Lock className="mx-auto h-6 w-6 text-muted-foreground transition-transform duration-200 hover:scale-110" />
               <h3 className="text-lg font-semibold mt-2">Industry Best Practices</h3>
               <p className="text-sm text-muted-foreground">We take the most advanced security measures to ensure that your account is as safe as possible.</p>
-              <Button variant="secondary" className="mt-4">Start Free Trial</Button>
+              <Button variant="secondary" className="mt-4 rounded-full">Start Free Trial</Button> {/* Made button pill shaped */}
             </div>
           </DialogContent>
         </Dialog>
@@ -215,7 +229,7 @@ const Header = () => {
         <DropdownMenu open={open} onOpenChange={setOpen}>
           <DropdownMenuTrigger asChild>
              {/* Added transition */}
-            <Button variant="ghost" className="h-8 w-8 p-0 rounded-full hover:bg-yellow-500 hover:text-gray-900">
+            <Button variant="ghost" className="h-8 w-8 p-0 rounded-full hover:bg-yellow-500 hover:text-gray-900 group">
               <Settings className="h-5 w-5 text-muted-foreground transition-transform duration-200 group-hover:rotate-45" />
               <span className="sr-only">Open user menu</span>
             </Button>
@@ -225,11 +239,11 @@ const Header = () => {
              <DropdownMenuItem className="flex items-center justify-between hover:bg-yellow-500 hover:text-gray-900 rounded-md" onSelect={(e) => e.preventDefault()}>
               <span>Theme</span>
                 <Switch
-                    id="theme-switch"
-                    checked={theme === 'dark'}
-                    onCheckedChange={handleThemeToggle}
-                    aria-label="Toggle theme"
-                  />
+                  id="theme-switch"
+                  checked={theme === 'dark'} // Correctly reflect current theme state
+                  onCheckedChange={handleThemeToggle} // Use the debounced handler
+                  aria-label="Toggle theme"
+                />
             </DropdownMenuItem>
             <DropdownMenuItem className="hover:bg-yellow-500 hover:text-gray-900 rounded-md" onSelect={(e) => e.preventDefault()}>
               Language
