@@ -19,18 +19,18 @@ interface Platform {
   dataAiHint: string;
 }
 
-// TODO: Replace these placeholder URLs with your actual Firebase Storage URLs
+// IMPORTANT: Replace these placeholder URLs with your actual Firebase Storage URLs
 // after uploading the logo images to the 'logos/' directory in Firebase Storage.
 // Example format: "https://firebasestorage.googleapis.com/v0/b/YOUR_PROJECT_ID.appspot.com/o/logos%2Fgroww.png?alt=media"
 const logoUrls = {
-  groww: 'https://via.placeholder.com/40.png?text=Logo', // Updated placeholder
-  upstox: 'https://via.placeholder.com/40.png?text=Logo', // Updated placeholder
-  zerodha: 'https://via.placeholder.com/40.png?text=Logo', // Updated placeholder
-  binance: 'https://assets.coingecko.com/coins/images/825/small/binance-coin-logo.png',
-  coinbase: 'https://assets.coingecko.com/markets/images/23/small/Coinbase_Coin_Primary.png',
-  metamask: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880',
-  trustwallet: 'https://via.placeholder.com/40.png?text=Logo', // Updated placeholder
-  ledger: 'https://via.placeholder.com/40.png?text=Logo', // Updated placeholder
+  groww: 'https://placehold.co/40x40.png', // REPLACE with your Firebase Storage URL for groww.png
+  upstox: 'https://placehold.co/40x40.png', // REPLACE with your Firebase Storage URL for upstox.png
+  zerodha: 'https://placehold.co/40x40.png', // REPLACE with your Firebase Storage URL for zerodha.png
+  binance: 'https://assets.coingecko.com/coins/images/825/small/binance-coin-logo.png', // This CoinGecko URL seems to work
+  coinbase: 'https://assets.coingecko.com/markets/images/23/small/Coinbase_Coin_Primary.png', // This CoinGecko URL seems to work
+  metamask: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880', // This CoinGecko URL seems to work
+  trustwallet: 'https://placehold.co/40x40.png', // REPLACE with your Firebase Storage URL for trustwallet.png
+  ledger: 'https://placehold.co/40x40.png', // REPLACE with your Firebase Storage URL for ledger.png
 };
 
 const platforms: Platform[] = [
