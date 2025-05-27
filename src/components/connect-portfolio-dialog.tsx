@@ -24,13 +24,13 @@ interface Platform {
 // upload these logos to your own Firebase Storage and replace these URLs
 // with your Firebase Storage public URLs.
 const logoUrls = {
-  groww: 'https://seeklogo.com/images/G/groww-logo-430536.png',
-  upstox: 'https://seeklogo.com/images/U/upstox-logo-435648.png',
-  zerodha: 'https://seeklogo.com/images/Z/zerodha-logo-356512.png',
-  binance: 'https://seeklogo.com/images/B/binance-logo-2F6D6B3F3A-seeklogo.com.png',
-  coinbase: 'https://assets.coingecko.com/markets/images/23/small/Coinbase_Coin_Primary.png',
-  metamask: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880',
-  trustwallet: 'https://seeklogo.com/images/T/trust-wallet-logo-424767.png',
+  groww: 'https://placehold.co/40x40.png', // Placeholder
+  upstox: 'https://placehold.co/40x40.png', // Placeholder
+  zerodha: 'https://placehold.co/40x40.png', // Placeholder
+  binance: 'https://assets.coingecko.com/coins/images/825/small/binance-coin-logo.png', // CoinGecko
+  coinbase: 'https://assets.coingecko.com/markets/images/23/small/Coinbase_Coin_Primary.png', // CoinGecko
+  metamask: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880', // CoinGecko
+  trustwallet: 'https://placehold.co/40x40.png', // Placeholder
   ledger: 'https://placehold.co/40x40.png', // Placeholder for Ledger
 };
 
