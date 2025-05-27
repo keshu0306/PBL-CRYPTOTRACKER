@@ -10,18 +10,42 @@ import {Dialog, DialogTrigger} from "@/components/ui/dialog";
 import ConnectPortfolioDialog from "@/components/connect-portfolio-dialog";
 
 
-const logoMap: Record<string, string> = {
-  "Binance": "https://assets.coingecko.com/coins/images/825/small/binance-coin-logo.png",
-  "MetaMask": "https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880",
-  "Coinbase": "https://assets.coingecko.com/markets/images/23/small/Coinbase_Coin_Primary.png",
-  "Other": "https://cdn-icons-png.flaticon.com/512/565/565547.png"
+const logoMap: Record<string, {url: string, website: string}> = {
+  "Binance": {
+    url: "https://assets.coingecko.com/coins/images/825/small/binance-coin-logo.png",
+    website: "https://www.binance.com/"
+  },
+  "MetaMask": {
+    url: "https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880",
+    website: "https://metamask.io/"
+  },
+  "Coinbase": {
+    url: "https://assets.coingecko.com/markets/images/23/small/Coinbase_Coin_Primary.png",
+    website: "https://www.coinbase.com/"
+  },
+  "Other": {
+    url: "https://cdn-icons-png.flaticon.com/512/565/565547.png",
+    website: "" // No specific website for "Other", it will open the dialog
+  }
 };
 
-const getLogo = (name: string): string => logoMap[name] || "https://placehold.co/48x48.png";
+const getLogoUrl = (name: string): string => logoMap[name]?.url || "https://placehold.co/48x48.png";
+const getWebsiteUrl = (name: string): string => logoMap[name]?.website || "#";
 
 
 export default function Home() {
   const [isConnectPortfolioDialogOpen, setIsConnectPortfolioDialogOpen] = useState(false);
+
+  const handlePlatformConnect = (platformName: string) => {
+    if (platformName === "Other") {
+      setIsConnectPortfolioDialogOpen(true);
+    } else {
+      const websiteUrl = getWebsiteUrl(platformName);
+      if (websiteUrl && websiteUrl !== "#") {
+        window.open(websiteUrl, '_blank', 'noopener,noreferrer');
+      }
+    }
+  };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[calc(100vh-80px)] py-2 bg-cover bg-center bg-no-repeat" style={{backgroundImage: "url('https://images.unsplash.com/photo-1639815666611-94390c6550f1?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')"}}>
@@ -29,26 +53,30 @@ export default function Home() {
       <p className="text-lg mb-8 text-muted-foreground text-center">Connect your entire portfolio to track, buy, swap, and stake your assets.</p>
 
       <div className="flex justify-center mb-8 flex-wrap gap-4">
-        <div className="flex flex-col items-center rounded-lg p-3 shadow-md transition-transform duration-200 hover:scale-105" style={{backgroundColor: 'hsl(var(--secondary))'}}>
-          <img src={getLogo("Binance")} data-ai-hint="binance logo" alt="Binance" className="w-12 h-12 rounded-md mb-2 object-contain transition-transform duration-200 hover:scale-110"/>
-          <span className="text-sm">Binance</span>
-          <Button variant="outline" size="sm" className="rounded-full mt-2">Connect →</Button>
-        </div>
-        <div className="flex flex-col items-center rounded-lg p-3 shadow-md transition-transform duration-200 hover:scale-105" style={{backgroundColor: 'hsl(var(--secondary))'}}>
-          <img src={getLogo("MetaMask")} data-ai-hint="metamask logo ethereum" alt="MetaMask" className="w-12 h-12 rounded-md mb-2 object-contain transition-transform duration-200 hover:scale-110"/>
-          <span className="text-sm">MetaMask</span>
-          <Button variant="outline" size="sm" className="rounded-full mt-2">Connect →</Button>
-        </div>
-        <div className="flex flex-col items-center rounded-lg p-3 shadow-md transition-transform duration-200 hover:scale-105" style={{backgroundColor: 'hsl(var(--secondary))'}}>
-          <img src={getLogo("Coinbase")} data-ai-hint="coinbase logo" alt="Coinbase" className="w-12 h-12 rounded-md mb-2 object-contain transition-transform duration-200 hover:scale-110"/>
-          <span className="text-sm">Coinbase</span>
-          <Button variant="outline" size="sm" className="rounded-full mt-2">Connect →</Button>
-        </div>
-        <div className="flex flex-col items-center rounded-lg p-3 shadow-md transition-transform duration-200 hover:scale-105" style={{backgroundColor: 'hsl(var(--secondary))'}}>
-          <img src={getLogo("Other")} data-ai-hint="wallet connect generic" alt="Other" className="w-12 h-12 rounded-md mb-2 object-contain transition-transform duration-200 hover:scale-110"/>
-          <span className="text-sm">Other</span>
-          <Button variant="outline" size="sm" className="rounded-full mt-2">Connect →</Button>
-        </div>
+        {Object.keys(logoMap).map((platformName) => (
+          <div 
+            key={platformName}
+            className="flex flex-col items-center rounded-lg p-3 shadow-md transition-transform duration-200 hover:scale-105" 
+            style={{backgroundColor: 'hsl(var(--secondary))'}}
+          >
+            <img 
+              src={getLogoUrl(platformName)} 
+              data-ai-hint={`${platformName.toLowerCase()} logo`} 
+              alt={platformName} 
+              className="w-12 h-12 rounded-md mb-2 object-contain transition-transform duration-200 hover:scale-110"
+              onError={(e) => { (e.currentTarget as HTMLImageElement).src = 'https://placehold.co/48x48.png?text=Error';}}
+            />
+            <span className="text-sm">{platformName}</span>
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className="rounded-full mt-2"
+              onClick={() => handlePlatformConnect(platformName)}
+            >
+              Connect →
+            </Button>
+          </div>
+        ))}
       </div>
 
       <div className="relative w-full max-w-md group">
@@ -61,6 +89,7 @@ export default function Home() {
       </div>
 
       <Dialog open={isConnectPortfolioDialogOpen} onOpenChange={setIsConnectPortfolioDialogOpen}>
+        {/* This DialogTrigger is for the main "Connect Portfolio" button at the bottom */}
         <DialogTrigger asChild>
           <Button className="mt-8 rounded-full">Connect Portfolio</Button>
         </DialogTrigger>
