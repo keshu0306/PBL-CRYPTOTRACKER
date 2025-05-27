@@ -22,16 +22,15 @@ interface Platform {
 // TODO: Replace these placeholder URLs with your actual Firebase Storage URLs
 // after uploading the logo images to the 'logos/' directory in Firebase Storage.
 // Example format: "https://firebasestorage.googleapis.com/v0/b/YOUR_PROJECT_ID.appspot.com/o/logos%2Fgroww.png?alt=media"
-// For now, using placehold.co for generic placeholders and CoinGecko for specific ones to match the screenshot.
 const logoUrls = {
-  groww: 'https://placehold.co/40x40.png',
-  upstox: 'https://placehold.co/40x40.png',
-  zerodha: 'https://placehold.co/40x40.png',
+  groww: 'https://via.placeholder.com/40.png?text=Logo', // Updated placeholder
+  upstox: 'https://via.placeholder.com/40.png?text=Logo', // Updated placeholder
+  zerodha: 'https://via.placeholder.com/40.png?text=Logo', // Updated placeholder
   binance: 'https://assets.coingecko.com/coins/images/825/small/binance-coin-logo.png',
   coinbase: 'https://assets.coingecko.com/markets/images/23/small/Coinbase_Coin_Primary.png',
   metamask: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880',
-  trustwallet: 'https://placehold.co/40x40.png',
-  ledger: 'https://placehold.co/40x40.png',
+  trustwallet: 'https://via.placeholder.com/40.png?text=Logo', // Updated placeholder
+  ledger: 'https://via.placeholder.com/40.png?text=Logo', // Updated placeholder
 };
 
 const platforms: Platform[] = [
