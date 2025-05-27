@@ -26,9 +26,9 @@ const logoUrls = {
   groww: 'https://placehold.co/40x40.png', // Expected Firebase path: logos/groww.png
   upstox: 'https://placehold.co/40x40.png', // Expected Firebase path: logos/upstox.png
   zerodha: 'https://placehold.co/40x40.png', // Expected Firebase path: logos/zerodha.png
-  binance: 'https://assets.coingecko.com/coins/images/825/small/binance-coin-logo.png', // Using Coingecko for now, expected Firebase path: logos/binance.png
-  coinbase: 'https://assets.coingecko.com/markets/images/23/small/Coinbase_Coin_Primary.png', // Using Coingecko for now, expected Firebase path: logos/coinbase.png
-  metamask: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880', // Using Coingecko for now, expected Firebase path: logos/metamask.png
+  binance: 'https://assets.coingecko.com/coins/images/825/small/binance-coin-logo.png', // Using Coingecko, expected Firebase path: logos/binance.png
+  coinbase: 'https://assets.coingecko.com/markets/images/23/small/Coinbase_Coin_Primary.png', // Using Coingecko, expected Firebase path: logos/coinbase.png
+  metamask: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880', // Using Coingecko, expected Firebase path: logos/metamask.png
   trustwallet: 'https://placehold.co/40x40.png', // Expected Firebase path: logos/trustwallet.png
   ledger: 'https://placehold.co/40x40.png', // Placeholder for Ledger, expected Firebase path: logos/ledger.png (if you add it)
 };
@@ -39,7 +39,7 @@ const platforms: Platform[] = [
   { name: 'Zerodha', logoUrl: logoUrls.zerodha, dataAiHint: 'zerodha kite logo' },
   { name: 'Binance', logoUrl: logoUrls.binance, dataAiHint: 'binance logo' },
   { name: 'Coinbase Wallet', logoUrl: logoUrls.coinbase, dataAiHint: 'coinbase logo' },
-  { name: 'MetaMask', logoUrl: logoUrls.metamask, dataAiHint: 'metamask logo' },
+  { name: 'MetaMask', logoUrl: logoUrls.metamask, dataAiHint: 'metamask logo ethereum' },
   { name: 'Trust Wallet', logoUrl: logoUrls.trustwallet, dataAiHint: 'trust wallet logo' },
   { name: 'Ledger', logoUrl: logoUrls.ledger, dataAiHint: 'ledger nano logo' },
   // Add more platforms here
