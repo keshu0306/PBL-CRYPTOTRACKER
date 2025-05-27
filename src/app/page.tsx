@@ -15,7 +15,7 @@ export default function Home() {
 
       <div className="flex justify-center mb-8 flex-wrap gap-4"> {/* Adjusted class: removed space-x-4, using gap-4 */}
         <div className="flex flex-col items-center rounded-lg p-3 shadow-md transition-transform duration-200 hover:scale-105" style={{backgroundColor: 'hsl(var(--secondary))'}}>
-          <img src="https://placehold.co/48x48.png" data-ai-hint="binance" alt="Binance" className="w-12 h-12 rounded-md mb-2 object-contain transition-transform duration-200 hover:scale-110"/>
+          <img src="https://picsum.photos/48" data-ai-hint="binance logo" alt="Binance" className="w-12 h-12 rounded-md mb-2 object-contain transition-transform duration-200 hover:scale-110"/>
           <span className="text-sm">Binance</span>
           <Button variant="outline" size="sm" className="rounded-full mt-2">Connect →</Button>
         </div>
@@ -25,12 +25,12 @@ export default function Home() {
           <Button variant="outline" size="sm" className="rounded-full mt-2">Connect →</Button>
         </div>
         <div className="flex flex-col items-center rounded-lg p-3 shadow-md transition-transform duration-200 hover:scale-105" style={{backgroundColor: 'hsl(var(--secondary))'}}>
-          <img src="https://placehold.co/48x48.png" data-ai-hint="coinbase" alt="Coinbase" className="w-12 h-12 rounded-md mb-2 object-contain transition-transform duration-200 hover:scale-110"/>
+          <img src="https://picsum.photos/48" data-ai-hint="coinbase logo" alt="Coinbase" className="w-12 h-12 rounded-md mb-2 object-contain transition-transform duration-200 hover:scale-110"/>
           <span className="text-sm">Coinbase (Individ...)</span>
           <Button variant="outline" size="sm" className="rounded-full mt-2">Connect →</Button>
         </div>
         <div className="flex flex-col items-center rounded-lg p-3 shadow-md transition-transform duration-200 hover:scale-105" style={{backgroundColor: 'hsl(var(--secondary))'}}>
-          <img src="https://placehold.co/48x48.png" data-ai-hint="wallet connect" alt="Other" className="w-12 h-12 rounded-md mb-2 object-contain transition-transform duration-200 hover:scale-110"/>
+          <img src="https://picsum.photos/48" data-ai-hint="wallet connect" alt="Other" className="w-12 h-12 rounded-md mb-2 object-contain transition-transform duration-200 hover:scale-110"/>
           <span className="text-sm">Other</span>
           <Button variant="outline" size="sm" className="rounded-full mt-2">Connect →</Button>
         </div>
