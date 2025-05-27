@@ -19,15 +19,29 @@ interface Platform {
   dataAiHint: string;
 }
 
+// TODO: Replace these placeholder URLs with your actual Firebase Storage URLs
+// after uploading the logo images to the 'logos/' directory in Firebase Storage.
+// Example format: "https://firebasestorage.googleapis.com/v0/b/YOUR_PROJECT_ID.appspot.com/o/logos%2Fgroww.png?alt=media"
+const logoUrls = {
+  groww: 'https://placehold.co/40x40.png', // Expected Firebase path: logos/groww.png
+  upstox: 'https://placehold.co/40x40.png', // Expected Firebase path: logos/upstox.png
+  zerodha: 'https://placehold.co/40x40.png', // Expected Firebase path: logos/zerodha.png
+  binance: 'https://assets.coingecko.com/coins/images/825/small/binance-coin-logo.png', // Using Coingecko for now, expected Firebase path: logos/binance.png
+  coinbase: 'https://assets.coingecko.com/markets/images/23/small/Coinbase_Coin_Primary.png', // Using Coingecko for now, expected Firebase path: logos/coinbase.png
+  metamask: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880', // Using Coingecko for now, expected Firebase path: logos/metamask.png
+  trustwallet: 'https://placehold.co/40x40.png', // Expected Firebase path: logos/trustwallet.png
+  ledger: 'https://placehold.co/40x40.png', // Placeholder for Ledger, expected Firebase path: logos/ledger.png (if you add it)
+};
+
 const platforms: Platform[] = [
-  { name: 'Groww', logoUrl: 'https://placehold.co/40x40.png', dataAiHint: 'groww logo' },
-  { name: 'Upstox', logoUrl: 'https://placehold.co/40x40.png', dataAiHint: 'upstox logo' },
-  { name: 'Zerodha', logoUrl: 'https://placehold.co/40x40.png', dataAiHint: 'zerodha kite logo' },
-  { name: 'Binance', logoUrl: 'https://cryptologos.cc/logos/binance-coin-bnb-logo.png?v=026', dataAiHint: 'binance logo' },
-  { name: 'Coinbase Wallet', logoUrl: 'https://cryptologos.cc/logos/coinbase-coinbase-logo.png?v=026', dataAiHint: 'coinbase logo' },
-  { name: 'MetaMask', logoUrl: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880', dataAiHint: 'metamask logo ethereum' },
-  { name: 'Trust Wallet', logoUrl: 'https://placehold.co/40x40.png', dataAiHint: 'trust wallet logo' },
-  { name: 'Ledger', logoUrl: 'https://placehold.co/40x40.png', dataAiHint: 'ledger nano logo' },
+  { name: 'Groww', logoUrl: logoUrls.groww, dataAiHint: 'groww logo' },
+  { name: 'Upstox', logoUrl: logoUrls.upstox, dataAiHint: 'upstox logo' },
+  { name: 'Zerodha', logoUrl: logoUrls.zerodha, dataAiHint: 'zerodha kite logo' },
+  { name: 'Binance', logoUrl: logoUrls.binance, dataAiHint: 'binance logo' },
+  { name: 'Coinbase Wallet', logoUrl: logoUrls.coinbase, dataAiHint: 'coinbase logo' },
+  { name: 'MetaMask', logoUrl: logoUrls.metamask, dataAiHint: 'metamask logo' },
+  { name: 'Trust Wallet', logoUrl: logoUrls.trustwallet, dataAiHint: 'trust wallet logo' },
+  { name: 'Ledger', logoUrl: logoUrls.ledger, dataAiHint: 'ledger nano logo' },
   // Add more platforms here
 ];
 
@@ -65,7 +79,7 @@ const ConnectPortfolioDialog: React.FC<ConnectPortfolioDialogProps> = ({ onOpenC
                 src={platform.logoUrl}
                 alt={`${platform.name} logo`}
                 data-ai-hint={platform.dataAiHint}
-                className="w-8 h-8 mr-3 rounded-md object-contain transition-transform duration-200 group-hover:scale-110" // Adjusted size to w-8 h-8
+                className="w-8 h-8 mr-3 rounded-md object-contain transition-transform duration-200 group-hover:scale-110"
               />
               <span className="text-base font-medium">{platform.name}</span>
               <span className="ml-auto text-xs text-muted-foreground group-hover:text-accent-foreground">Connect →</span>
