@@ -17,6 +17,7 @@ interface Platform {
   name: string;
   logoUrl: string;
   dataAiHint: string;
+  websiteUrl: string; // Added website URL property
 }
 
 // IMPORTANT: If the external URLs below do not work reliably
@@ -24,32 +25,26 @@ interface Platform {
 // upload these logos to your own Firebase Storage and replace these URLs
 // with your Firebase Storage public URLs.
 // Example structure:
-// const logoUrls = {
-//   groww: "https://firebasestorage.googleapis.com/v0/b/YOUR_PROJECT_ID.appspot.com/o/logos%2Fgroww.png?alt=media",
-//   // ... other logos
-// };
-// Then reference them as platform.logoUrl = logoUrls.groww;
-
 const logoUrls = {
-  groww: 'https://placehold.co/40x40.png', // Placeholder - Replace with your Firebase Storage URL
-  upstox: 'https://placehold.co/40x40.png', // Placeholder - Replace with your Firebase Storage URL
-  zerodha: 'https://placehold.co/40x40.png', // Placeholder - Replace with your Firebase Storage URL
-  binance: 'https://assets.coingecko.com/coins/images/825/small/binance-coin-logo.png', // CoinGecko
-  coinbase: 'https://assets.coingecko.com/markets/images/23/small/Coinbase_Coin_Primary.png', // CoinGecko
-  metamask: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880', // CoinGecko (Ethereum logo for MetaMask)
-  trustwallet: 'https://placehold.co/40x40.png', // Placeholder - Replace with your Firebase Storage URL
+  groww: 'https://seeklogo.com/images/G/groww-logo-430536.png',
+  upstox: 'https://seeklogo.com/images/U/upstox-logo-435648.png',
+  zerodha: 'https://seeklogo.com/images/Z/zerodha-logo-356512.png',
+  binance: 'https://assets.coingecko.com/coins/images/825/small/binance-coin-logo.png',
+  coinbase: 'https://assets.coingecko.com/markets/images/23/small/Coinbase_Coin_Primary.png',
+  metamask: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880',
+  trustwallet: 'https://seeklogo.com/images/T/trust-wallet-logo-424767.png',
   ledger: 'https://placehold.co/40x40.png', // Placeholder - Replace with your Firebase Storage URL
 };
 
 const platforms: Platform[] = [
-  { name: 'Groww', logoUrl: logoUrls.groww, dataAiHint: 'groww logo investment' },
-  { name: 'Upstox', logoUrl: logoUrls.upstox, dataAiHint: 'upstox logo trading' },
-  { name: 'Zerodha', logoUrl: logoUrls.zerodha, dataAiHint: 'zerodha kite logo stock' },
-  { name: 'Binance', logoUrl: logoUrls.binance, dataAiHint: 'binance logo crypto exchange' },
-  { name: 'Coinbase Wallet', logoUrl: logoUrls.coinbase, dataAiHint: 'coinbase wallet logo crypto' },
-  { name: 'MetaMask', logoUrl: logoUrls.metamask, dataAiHint: 'metamask logo ethereum wallet' },
-  { name: 'Trust Wallet', logoUrl: logoUrls.trustwallet, dataAiHint: 'trust wallet logo crypto mobile' },
-  { name: 'Ledger', logoUrl: logoUrls.ledger, dataAiHint: 'ledger nano logo hardware wallet' },
+  { name: 'Groww', logoUrl: logoUrls.groww, dataAiHint: 'groww logo investment', websiteUrl: 'https://groww.in/' },
+  { name: 'Upstox', logoUrl: logoUrls.upstox, dataAiHint: 'upstox logo trading', websiteUrl: 'https://upstox.com/' },
+  { name: 'Zerodha', logoUrl: logoUrls.zerodha, dataAiHint: 'zerodha kite logo stock', websiteUrl: 'https://zerodha.com/' },
+  { name: 'Binance', logoUrl: logoUrls.binance, dataAiHint: 'binance logo crypto exchange', websiteUrl: 'https://www.binance.com/' },
+  { name: 'Coinbase Wallet', logoUrl: logoUrls.coinbase, dataAiHint: 'coinbase wallet logo crypto', websiteUrl: 'https://www.coinbase.com/wallet' },
+  { name: 'MetaMask', logoUrl: logoUrls.metamask, dataAiHint: 'metamask logo ethereum wallet', websiteUrl: 'https://metamask.io/' },
+  { name: 'Trust Wallet', logoUrl: logoUrls.trustwallet, dataAiHint: 'trust wallet logo crypto mobile', websiteUrl: 'https://trustwallet.com/' },
+  { name: 'Ledger', logoUrl: logoUrls.ledger, dataAiHint: 'ledger nano logo hardware wallet', websiteUrl: 'https://www.ledger.com/' },
   // Add more platforms here
 ];
 
@@ -58,11 +53,14 @@ interface ConnectPortfolioDialogProps {
 }
 
 const ConnectPortfolioDialog: React.FC<ConnectPortfolioDialogProps> = ({ onOpenChange }) => {
-  const handleConnect = (platformName: string) => {
-    console.log(`Attempting to connect with ${platformName}`);
-    // Placeholder for actual connection logic
-    // In a real app, this would initiate an OAuth flow or similar
-    if (onOpenChange) onOpenChange(false); // Close dialog on action
+  const handleConnect = (platform: Platform) => {
+    console.log(`Attempting to connect with ${platform.name}, opening ${platform.websiteUrl}`);
+    if (platform.websiteUrl) {
+      window.open(platform.websiteUrl, '_blank', 'noopener,noreferrer');
+    }
+    // In a real app, this might initiate an OAuth flow or similar
+    // For now, we'll just open the website and optionally close the dialog.
+    // if (onOpenChange) onOpenChange(false); // Optionally close dialog on action
   };
 
   return (
@@ -81,7 +79,7 @@ const ConnectPortfolioDialog: React.FC<ConnectPortfolioDialogProps> = ({ onOpenC
               key={platform.name}
               variant="outline"
               className="w-full justify-start items-center py-6 rounded-lg hover:bg-accent/70 group"
-              onClick={() => handleConnect(platform.name)}
+              onClick={() => handleConnect(platform)}
             >
               <img
                 src={platform.logoUrl}
@@ -90,7 +88,7 @@ const ConnectPortfolioDialog: React.FC<ConnectPortfolioDialogProps> = ({ onOpenC
                 className="w-8 h-8 mr-3 rounded-md object-contain transition-transform duration-200 group-hover:scale-110"
                 onError={(e) => {
                   // Fallback for broken images, though ideally, URLs should be reliable
-                  (e.currentTarget as HTMLImageElement).src = 'https://placehold.co/40x40.png/CCCCCC/333333?text=Error';
+                  (e.currentTarget as HTMLImageElement).src = 'https://via.placeholder.com/40.png?text=Error';
                   (e.currentTarget as HTMLImageElement).alt = `${platform.name} logo (Error)`;
                 }}
               />
@@ -104,7 +102,7 @@ const ConnectPortfolioDialog: React.FC<ConnectPortfolioDialogProps> = ({ onOpenC
       <Button
         variant="ghost"
         className="w-full mt-6 rounded-lg py-6 hover:bg-accent/50 group"
-        onClick={() => handleConnect('Other Wallet/Exchange')}
+        onClick={() => handleConnect({name: 'Other Wallet/Exchange', logoUrl: '', dataAiHint: 'generic wallet', websiteUrl: 'https://www.google.com/search?q=connect+other+wallet+or+exchange'})} // Placeholder URL
       >
         <Wallet className="w-6 h-6 mr-3 transition-transform duration-200 group-hover:scale-110" />
         <span className="text-base font-medium">Connect Other Wallet/Exchange</span>
