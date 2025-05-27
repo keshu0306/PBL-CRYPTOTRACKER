@@ -13,7 +13,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import {Switch} from '@/components/ui/switch';
-import { useTheme } from 'next-themes'; // Correct import
+import { useTheme } from 'next-themes';
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from '@/components/ui/select';
 import SwapDialog from "@/components/swap-dialog";
 import {
@@ -41,23 +41,22 @@ import {
   Download,
   Lock,
 } from "lucide-react";
-import LoginDialog from "@/components/auth/login-dialog"; // Import the LoginDialog component
+import LoginDialog from "@/components/auth/login-dialog";
 
 const Header = () => {
   const [mounted, setMounted] = useState(false);
-  const { setTheme, theme } = useTheme(); // Use the hook correctly
+  const { setTheme, theme } = useTheme();
   const [language, setLanguage] = useState('English');
   const [currency, setCurrency] = useState('USD');
   const [open, setOpen] = useState(false);
   const [isGridDialogOpen, setIsGridDialogOpen] = useState(false);
-  const [isLoginDialogOpen, setIsLoginDialogOpen] = useState(false); // State for login dialog
-  const [isSignupDialogOpen, setIsSignupDialogOpen] = useState(false); // State for signup dialog
+  const [isLoginDialogOpen, setIsLoginDialogOpen] = useState(false);
+  const [isSignupDialogOpen, setIsSignupDialogOpen] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Ensure theme is only changed after mount
   const handleThemeToggle = useCallback((checked: boolean) => {
     if (mounted) {
       setTheme(checked ? 'dark' : 'light');
@@ -65,9 +64,8 @@ const Header = () => {
   }, [setTheme, mounted]);
 
 
-  // Avoid rendering theme-dependent UI until mounted
   if (!mounted) {
-    return null; // Or a loading skeleton
+    return null;
   }
 
 
@@ -76,8 +74,13 @@ const Header = () => {
       {/* Logo and App Name */}
       <div className="flex items-center space-x-2">
         <img
+          src="https://assets.coingecko.com/coins/images/1/small/bitcoin.png"
+          alt="Bitcoin Icon"
+          className="h-8 w-8 rounded-full transition-transform duration-200 hover:scale-110"
+        />
+        <img
           src="https://picsum.photos/id/788/32/32"
-          alt="Logo"
+          alt="App Logo"
           className="rounded-full transition-transform duration-200 hover:scale-110"
         />
         <Link href="/" className="font-bold text-xl transition-opacity duration-200 hover:opacity-80">
@@ -100,7 +103,6 @@ const Header = () => {
         </Link>
         <Dialog open={isGridDialogOpen} onOpenChange={setIsGridDialogOpen}>
           <DialogTrigger asChild>
-             {/* Added transition */}
             <Button variant="ghost" size="sm" className="h-8 w-8 rounded-full p-0 hover:bg-yellow-500 hover:text-gray-900 group">
               <Grid className="h-4 w-4 transition-transform duration-200 group-hover:scale-110"/>
             </Button>
@@ -109,14 +111,12 @@ const Header = () => {
             <DialogHeader>
               <DialogTitle>More Options</DialogTitle>
               <DialogDescription>Explore additional features and options.</DialogDescription>
-               <DialogClose className="absolute right-4 top-4 rounded-full p-1 opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground group"> {/* Added group */}
-                 {/* Added transition */}
+               <DialogClose className="absolute right-4 top-4 rounded-full p-1 opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground group">
                 <X className="h-4 w-4 transition-transform duration-200 group-hover:rotate-90" />
                 <span className="sr-only">Close</span>
               </DialogClose>
             </DialogHeader>
             <div className="grid grid-cols-2 gap-4 py-4">
-              {/* Products Section */}
               <div>
                 <h3 className="text-lg font-semibold mb-2">Products</h3>
                 <ul>
@@ -151,7 +151,6 @@ const Header = () => {
                 </ul>
               </div>
 
-              {/* Other Section */}
               <div>
                 <h3 className="text-lg font-semibold mb-2">Other</h3>
                 <ul>
@@ -189,23 +188,19 @@ const Header = () => {
                       <a href="#" className="font-medium hover:underline">24h Report</a>
                       <a href="#" className="font-medium hover:underline">Press Kit</a>
                       <a href="#" className="font-medium hover:underline">API Docs</a>
-                      {/* Add App Store and Google Play buttons here */}
-                       {/* Added transition */}
-                      <a href="#" className="block mt-2 transition-opacity duration-200 hover:opacity-80"><img src="https://picsum.photos/50/20" alt="App Store" /></a>
-                       {/* Added transition */}
-                      <a href="#" className="block mt-1 transition-opacity duration-200 hover:opacity-80"><img src="https://picsum.photos/50/20" alt="Google Play" /></a>
+                      <a href="#" className="block mt-2 transition-opacity duration-200 hover:opacity-80"><img src="https://picsum.photos/50/20" data-ai-hint="app store" alt="App Store" /></a>
+                      <a href="#" className="block mt-1 transition-opacity duration-200 hover:opacity-80"><img src="https://picsum.photos/50/20" data-ai-hint="google play" alt="Google Play" /></a>
                     </div>
                   </li>
                 </ul>
               </div>
             </div>
 
-            {/* Industry Best Practices Section */}
             <div className="text-center py-4">
               <Lock className="mx-auto h-6 w-6 text-muted-foreground transition-transform duration-200 hover:scale-110" />
               <h3 className="text-lg font-semibold mt-2">Industry Best Practices</h3>
               <p className="text-sm text-muted-foreground">We take the most advanced security measures to ensure that your account is as safe as possible.</p>
-              <Button variant="secondary" className="mt-4 rounded-full">Start Free Trial</Button> {/* Made button pill shaped */}
+              <Button variant="secondary" className="mt-4 rounded-full">Start Free Trial</Button>
             </div>
           </DialogContent>
         </Dialog>
@@ -218,7 +213,6 @@ const Header = () => {
           placeholder="Assets, Wallets, Domains"
           className="bg-secondary text-secondary-foreground rounded-full py-2 px-4 w-64 transition-all duration-200 focus-within:ring-2 focus-within:ring-ring"
         />
-         {/* Added transition */}
         <Search className="h-5 w-5 text-muted-foreground transition-transform duration-200 group-focus-within:scale-110" />
       </div>
 
@@ -226,7 +220,6 @@ const Header = () => {
       <div className="flex items-center space-x-4">
         <DropdownMenu open={open} onOpenChange={setOpen}>
           <DropdownMenuTrigger asChild>
-             {/* Added transition */}
             <Button variant="ghost" className="h-8 w-8 p-0 rounded-full hover:bg-yellow-500 hover:text-gray-900 group">
               <Settings className="h-5 w-5 text-muted-foreground transition-transform duration-200 group-hover:rotate-45" />
               <span className="sr-only">Open user menu</span>
@@ -238,8 +231,8 @@ const Header = () => {
               <span>Theme</span>
                 <Switch
                   id="theme-switch"
-                  checked={theme === 'dark'} // Correctly reflect current theme state
-                  onCheckedChange={handleThemeToggle} // Use the debounced handler
+                  checked={theme === 'dark'}
+                  onCheckedChange={handleThemeToggle}
                   aria-label="Toggle theme"
                 />
             </DropdownMenuItem>
@@ -252,7 +245,6 @@ const Header = () => {
                 <SelectContent align="end" className="rounded-md">
                   {mounted ? (
                     <>
-                      {/* Simplified list for example */}
                       <SelectItem value="English" className="rounded-md text-xs hover:bg-accent hover:text-accent-foreground">English</SelectItem>
                       <SelectItem value="Spanish" className="rounded-md text-xs hover:bg-accent hover:text-accent-foreground">Español</SelectItem>
                        <SelectItem value="French" className="rounded-md text-xs hover:bg-accent hover:text-accent-foreground">Français</SelectItem>
@@ -282,7 +274,6 @@ const Header = () => {
           </DropdownMenuContent>
         </DropdownMenu>
 
-        {/* Login Button with Dialog Trigger */}
         <Dialog open={isLoginDialogOpen} onOpenChange={setIsLoginDialogOpen}>
           <DialogTrigger asChild>
             <Button variant="outline" size="sm" className="rounded-full hover:bg-yellow-500 hover:text-gray-900">
@@ -292,7 +283,6 @@ const Header = () => {
           <LoginDialog onOpenChange={setIsLoginDialogOpen} />
         </Dialog>
 
-        {/* Get Started Button with Dialog Trigger for Signup */}
          <Dialog open={isSignupDialogOpen} onOpenChange={setIsSignupDialogOpen}>
            <DialogTrigger asChild>
              <Button size="sm" className="rounded-full">Get Started</Button>
@@ -301,7 +291,7 @@ const Header = () => {
          </Dialog>
 
         <Avatar className="h-8 w-8 transition-transform duration-200 hover:scale-110">
-          <AvatarImage src="https://picsum.photos/48/48" alt="Avatar" />
+          <AvatarImage src="https://picsum.photos/48/48" data-ai-hint="abstract random" alt="Avatar" />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
       </div>
