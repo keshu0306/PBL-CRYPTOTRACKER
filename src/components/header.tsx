@@ -76,7 +76,7 @@ const Header = () => {
       {/* Logo and App Name */}
       <div className="flex items-center space-x-2">
         <img
-          src="https://picsum.photos/32/32"
+          src="https://picsum.photos/id/788/32/32"
           alt="Logo"
           className="rounded-full transition-transform duration-200 hover:scale-110"
         />
@@ -256,9 +256,9 @@ const Header = () => {
                   {mounted ? (
                     <>
                       {/* Simplified list for example */}
-                      <SelectItem value="English" className="rounded-md text-xs">English</SelectItem>
-                      <SelectItem value="Spanish" className="rounded-md text-xs">Español</SelectItem>
-                       <SelectItem value="French" className="rounded-md text-xs">Français</SelectItem>
+                      <SelectItem value="English" className="rounded-md text-xs hover:bg-yellow-500 hover:text-gray-900">English</SelectItem>
+                      <SelectItem value="Spanish" className="rounded-md text-xs hover:bg-yellow-500 hover:text-gray-900">Español</SelectItem>
+                       <SelectItem value="French" className="rounded-md text-xs hover:bg-yellow-500 hover:text-gray-900">Français</SelectItem>
                     </>
                   ) : null}
                 </SelectContent>
@@ -274,7 +274,7 @@ const Header = () => {
                   {mounted ? (
                     <>
                       {currencies.sort((a, b) => a.name.localeCompare(b.name)).map((currency) => (
-                        <SelectItem key={currency.code} value={currency.code} className="rounded-md text-xs">{currency.name} ({currency.symbol})</SelectItem>
+                        <SelectItem key={currency.code} value={currency.code} className="rounded-md text-xs hover:bg-yellow-500 hover:text-gray-900">{currency.name} ({currency.symbol})</SelectItem>
                       ))}
                     </>
                   ) : null}
