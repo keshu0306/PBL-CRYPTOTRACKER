@@ -1,6 +1,7 @@
+
 'use client';
 
-import {getTopCryptocurrencies} from '@/services/coin-gecko';
+import {getTopCryptocurrencies, type Cryptocurrency} from '@/services/coin-gecko';
 import {useEffect, useState, useCallback} from 'react';
 import {
   Table,
@@ -15,7 +16,7 @@ import {SparklineChart} from "@/components/sparkline-chart";
 import {useRouter} from "next/navigation";
 import {formatMarketCap} from "@/lib/utils";
 import {Button} from "@/components/ui/button";
-import {RedoIcon} from "lucide-react";
+import {RedoIcon} from "lucide-react"; // Changed from ReloadIcon to RedoIcon
 import {
   Dialog,
   DialogContent,
@@ -27,7 +28,7 @@ import {
 import {Grid} from "lucide-react";
 
 export default function CryptocurrenciesPage() {
-  const [cryptocurrencies, setCryptocurrencies] = useState([]);
+  const [cryptocurrencies, setCryptocurrencies] = useState<Cryptocurrency[]>([]);
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [isGridDialogOpen, setIsGridDialogOpen] = useState(false);
@@ -148,7 +149,14 @@ export default function CryptocurrenciesPage() {
                 <TableCell>${formatMarketCap(crypto.marketCap)}</TableCell>
                 <TableCell>${formatMarketCap(crypto.volume24h)}</TableCell>
                 <TableCell>
-                  <SparklineChart data={[10, 30, 40, 20, 50, 60, 40]} color={crypto.priceChangePercentage24h > 0 ? "green" : "red"}/>
+                  {crypto.sparklineIn7d && crypto.sparklineIn7d.price && crypto.sparklineIn7d.price.length > 0 ? (
+                    <SparklineChart
+                      data={crypto.sparklineIn7d.price}
+                      color={crypto.priceChangePercentage24h > 0 ? "green" : "red"}
+                    />
+                  ) : (
+                    <div style={{ width: '100px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center' }} className="text-xs text-muted-foreground">N/A</div>
+                  )}
                 </TableCell>
               </TableRow>
             ))}

@@ -1,3 +1,4 @@
+
 /**
  * Represents a cryptocurrency.
  */
@@ -42,6 +43,10 @@ export interface Cryptocurrency {
    * Volume in 24 hours.
    */
   volume24h: number;
+  /**
+   * 7-day sparkline data.
+   */
+  sparklineIn7d?: { price: number[] };
 }
 
 /**
@@ -51,7 +56,7 @@ export interface Cryptocurrency {
  */
 export async function getTopCryptocurrencies(): Promise<Cryptocurrency[]> {
   const url =
-    'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false&price_change_percentage=1h,7d';
+    'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=true&price_change_percentage=1h,7d';
 
   try {
     const response = await fetch(url);
@@ -72,6 +77,7 @@ export async function getTopCryptocurrencies(): Promise<Cryptocurrency[]> {
       priceChangePercentage7dInCurrency: item.price_change_percentage_7d_in_currency,
       marketCap: item.market_cap,
       volume24h: item.total_volume,
+      sparklineIn7d: item.sparkline_in_7d,
     }));
   } catch (error) {
     console.error('Failed to fetch cryptocurrencies:', error);
@@ -96,7 +102,7 @@ export interface CryptocurrencyDetails {
    */
   name: string;
   /**
-   * Description of the cryptocurrency. 
+   * Description of the cryptocurrency.
    */
   description: string;
   /**
