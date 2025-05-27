@@ -8,9 +8,9 @@ import {Search} from "lucide-react";
 import {Button} from "@/components/ui/button";
 
 const logoMap: Record<string, string> = {
-  "Binance": "https://cryptologos.cc/logos/binance-coin-bnb-logo.png?v=026",
+  "Binance": "https://assets.coingecko.com/coins/images/825/small/binance-coin-logo.png", // Updated Binance logo
   "MetaMask": "https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880",
-  "Coinbase": "https://cryptologos.cc/logos/coinbase-coinbase-logo.png?v=026",
+  "Coinbase": "https://assets.coingecko.com/markets/images/23/small/Coinbase_Coin_Primary.png", // Updated Coinbase logo
   "Other": "https://cdn-icons-png.flaticon.com/512/565/565547.png"
 };
 
