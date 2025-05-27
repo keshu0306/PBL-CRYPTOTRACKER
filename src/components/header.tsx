@@ -87,9 +87,6 @@ const Header = () => {
 
       {/* Navigation Links */}
       <nav className="flex items-center space-x-4">
-        <Button variant="ghost" size="sm" className="rounded-full hover:bg-yellow-500 hover:text-gray-900">
-          Portfolio Tracker
-        </Button>
         <Dialog>
           <DialogTrigger asChild>
             <Button variant="ghost" size="sm" className="rounded-full hover:bg-yellow-500 hover:text-gray-900">Swap</Button>
@@ -236,8 +233,8 @@ const Header = () => {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="backdrop-blur-xl bg-secondary/90 border rounded-md w-56">
-            <DropdownMenuItem className="hover:bg-yellow-500 hover:text-gray-900 rounded-md">Profile</DropdownMenuItem>
-             <DropdownMenuItem className="flex items-center justify-between hover:bg-yellow-500 hover:text-gray-900 rounded-md" onSelect={(e) => e.preventDefault()}>
+            <DropdownMenuItem className="rounded-md hover:bg-accent hover:text-accent-foreground">Profile</DropdownMenuItem>
+             <DropdownMenuItem className="flex items-center justify-between rounded-md hover:bg-accent hover:text-accent-foreground" onSelect={(e) => e.preventDefault()}>
               <span>Theme</span>
                 <Switch
                   id="theme-switch"
@@ -246,7 +243,7 @@ const Header = () => {
                   aria-label="Toggle theme"
                 />
             </DropdownMenuItem>
-            <DropdownMenuItem className="hover:bg-yellow-500 hover:text-gray-900 rounded-md" onSelect={(e) => e.preventDefault()}>
+            <DropdownMenuItem className="rounded-md hover:bg-accent hover:text-accent-foreground" onSelect={(e) => e.preventDefault()}>
               Language
               <Select value={language} onValueChange={setLanguage}>
                 <SelectTrigger className="w-[120px] ml-auto rounded-md h-7 text-xs">
@@ -256,15 +253,15 @@ const Header = () => {
                   {mounted ? (
                     <>
                       {/* Simplified list for example */}
-                      <SelectItem value="English" className="rounded-md text-xs hover:bg-yellow-500 hover:text-gray-900">English</SelectItem>
-                      <SelectItem value="Spanish" className="rounded-md text-xs hover:bg-yellow-500 hover:text-gray-900">Español</SelectItem>
-                       <SelectItem value="French" className="rounded-md text-xs hover:bg-yellow-500 hover:text-gray-900">Français</SelectItem>
+                      <SelectItem value="English" className="rounded-md text-xs hover:bg-accent hover:text-accent-foreground">English</SelectItem>
+                      <SelectItem value="Spanish" className="rounded-md text-xs hover:bg-accent hover:text-accent-foreground">Español</SelectItem>
+                       <SelectItem value="French" className="rounded-md text-xs hover:bg-accent hover:text-accent-foreground">Français</SelectItem>
                     </>
                   ) : null}
                 </SelectContent>
               </Select>
             </DropdownMenuItem>
-             <DropdownMenuItem className="hover:bg-yellow-500 hover:text-gray-900 rounded-md" onSelect={(e) => e.preventDefault()}>
+             <DropdownMenuItem className="rounded-md hover:bg-accent hover:text-accent-foreground" onSelect={(e) => e.preventDefault()}>
               Currency
               <Select value={currency} onValueChange={setCurrency}>
                 <SelectTrigger className="w-[120px] ml-auto rounded-md h-7 text-xs">
@@ -274,14 +271,14 @@ const Header = () => {
                   {mounted ? (
                     <>
                       {currencies.sort((a, b) => a.name.localeCompare(b.name)).map((currency) => (
-                        <SelectItem key={currency.code} value={currency.code} className="rounded-md text-xs hover:bg-yellow-500 hover:text-gray-900">{currency.name} ({currency.symbol})</SelectItem>
+                        <SelectItem key={currency.code} value={currency.code} className="rounded-md text-xs hover:bg-accent hover:text-accent-foreground">{currency.name} ({currency.symbol})</SelectItem>
                       ))}
                     </>
                   ) : null}
                 </SelectContent>
               </Select>
             </DropdownMenuItem>
-            <DropdownMenuItem className="hover:bg-yellow-500 hover:text-gray-900 rounded-md">Sign out</DropdownMenuItem>
+            <DropdownMenuItem className="rounded-md hover:bg-accent hover:text-accent-foreground">Sign out</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
 
