@@ -19,18 +19,19 @@ interface Platform {
   dataAiHint: string;
 }
 
-// IMPORTANT: Replace these placeholder URLs with your actual Firebase Storage URLs
-// after uploading the logo images to the 'logos/' directory in Firebase Storage.
-// Example format: "https://firebasestorage.googleapis.com/v0/b/YOUR_PROJECT_ID.appspot.com/o/logos%2Fgroww.png?alt=media"
+// IMPORTANT: If the seeklogo.com or other external URLs below do not work reliably
+// (e.g., due to CORS issues or service availability), it is highly recommended to
+// upload these logos to your own Firebase Storage and replace these URLs
+// with your Firebase Storage public URLs.
 const logoUrls = {
   groww: 'https://seeklogo.com/images/G/groww-logo-430536.png',
   upstox: 'https://seeklogo.com/images/U/upstox-logo-435648.png',
   zerodha: 'https://seeklogo.com/images/Z/zerodha-logo-356512.png',
   binance: 'https://seeklogo.com/images/B/binance-logo-2F6D6B3F3A-seeklogo.com.png',
-  coinbase: 'https://assets.coingecko.com/markets/images/23/small/Coinbase_Coin_Primary.png', // Kept from previous version
-  metamask: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880', // Kept from previous version
+  coinbase: 'https://assets.coingecko.com/markets/images/23/small/Coinbase_Coin_Primary.png',
+  metamask: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880',
   trustwallet: 'https://seeklogo.com/images/T/trust-wallet-logo-424767.png',
-  ledger: 'https://placehold.co/40x40.png', // REPLACE with your Firebase Storage URL for ledger.png
+  ledger: 'https://placehold.co/40x40.png', // Placeholder for Ledger
 };
 
 const platforms: Platform[] = [
@@ -80,6 +81,7 @@ const ConnectPortfolioDialog: React.FC<ConnectPortfolioDialogProps> = ({ onOpenC
                 alt={`${platform.name} logo`}
                 data-ai-hint={platform.dataAiHint}
                 className="w-8 h-8 mr-3 rounded-md object-contain transition-transform duration-200 group-hover:scale-110"
+                // Add error handling for images if needed, e.g., onError={(e) => e.currentTarget.src = 'fallback-url.png'}
               />
               <span className="text-base font-medium">{platform.name}</span>
               <span className="ml-auto text-xs text-muted-foreground group-hover:text-accent-foreground">Connect →</span>
