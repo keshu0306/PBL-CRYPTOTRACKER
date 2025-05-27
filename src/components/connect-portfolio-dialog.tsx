@@ -19,19 +19,26 @@ interface Platform {
   dataAiHint: string;
 }
 
-// IMPORTANT: If the seeklogo.com or other external URLs below do not work reliably
+// IMPORTANT: If the external URLs below do not work reliably
 // (e.g., due to CORS issues or service availability), it is highly recommended to
 // upload these logos to your own Firebase Storage and replace these URLs
 // with your Firebase Storage public URLs.
+// Example structure:
+// const logoUrls = {
+//   groww: "https://firebasestorage.googleapis.com/v0/b/YOUR_PROJECT_ID.appspot.com/o/logos%2Fgroww.png?alt=media",
+//   // ... other logos
+// };
+// Then reference them as platform.logoUrl = logoUrls.groww;
+
 const logoUrls = {
-  groww: 'https://placehold.co/40x40.png', // Placeholder
-  upstox: 'https://placehold.co/40x40.png', // Placeholder
-  zerodha: 'https://placehold.co/40x40.png', // Placeholder
+  groww: 'https://placehold.co/40x40.png', // Placeholder - Replace with your Firebase Storage URL
+  upstox: 'https://placehold.co/40x40.png', // Placeholder - Replace with your Firebase Storage URL
+  zerodha: 'https://placehold.co/40x40.png', // Placeholder - Replace with your Firebase Storage URL
   binance: 'https://assets.coingecko.com/coins/images/825/small/binance-coin-logo.png', // CoinGecko
   coinbase: 'https://assets.coingecko.com/markets/images/23/small/Coinbase_Coin_Primary.png', // CoinGecko
-  metamask: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880', // CoinGecko
-  trustwallet: 'https://placehold.co/40x40.png', // Placeholder
-  ledger: 'https://placehold.co/40x40.png', // Placeholder for Ledger
+  metamask: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880', // CoinGecko (Ethereum logo for MetaMask)
+  trustwallet: 'https://placehold.co/40x40.png', // Placeholder - Replace with your Firebase Storage URL
+  ledger: 'https://placehold.co/40x40.png', // Placeholder - Replace with your Firebase Storage URL
 };
 
 const platforms: Platform[] = [
@@ -81,7 +88,11 @@ const ConnectPortfolioDialog: React.FC<ConnectPortfolioDialogProps> = ({ onOpenC
                 alt={`${platform.name} logo`}
                 data-ai-hint={platform.dataAiHint}
                 className="w-8 h-8 mr-3 rounded-md object-contain transition-transform duration-200 group-hover:scale-110"
-                // Add error handling for images if needed, e.g., onError={(e) => e.currentTarget.src = 'fallback-url.png'}
+                onError={(e) => {
+                  // Fallback for broken images, though ideally, URLs should be reliable
+                  (e.currentTarget as HTMLImageElement).src = 'https://placehold.co/40x40.png/CCCCCC/333333?text=Error';
+                  (e.currentTarget as HTMLImageElement).alt = `${platform.name} logo (Error)`;
+                }}
               />
               <span className="text-base font-medium">{platform.name}</span>
               <span className="ml-auto text-xs text-muted-foreground group-hover:text-accent-foreground">Connect →</span>
