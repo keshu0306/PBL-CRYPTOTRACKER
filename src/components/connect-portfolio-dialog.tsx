@@ -23,13 +23,13 @@ interface Platform {
 // after uploading the logo images to the 'logos/' directory in Firebase Storage.
 // Example format: "https://firebasestorage.googleapis.com/v0/b/YOUR_PROJECT_ID.appspot.com/o/logos%2Fgroww.png?alt=media"
 const logoUrls = {
-  groww: 'https://placehold.co/40x40.png', // REPLACE with your Firebase Storage URL for groww.png
-  upstox: 'https://placehold.co/40x40.png', // REPLACE with your Firebase Storage URL for upstox.png
-  zerodha: 'https://placehold.co/40x40.png', // REPLACE with your Firebase Storage URL for zerodha.png
-  binance: 'https://assets.coingecko.com/coins/images/825/small/binance-coin-logo.png', // This CoinGecko URL seems to work
-  coinbase: 'https://assets.coingecko.com/markets/images/23/small/Coinbase_Coin_Primary.png', // This CoinGecko URL seems to work
-  metamask: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880', // This CoinGecko URL seems to work
-  trustwallet: 'https://placehold.co/40x40.png', // REPLACE with your Firebase Storage URL for trustwallet.png
+  groww: 'https://seeklogo.com/images/G/groww-logo-430536.png',
+  upstox: 'https://seeklogo.com/images/U/upstox-logo-435648.png',
+  zerodha: 'https://seeklogo.com/images/Z/zerodha-logo-356512.png',
+  binance: 'https://seeklogo.com/images/B/binance-logo-2F6D6B3F3A-seeklogo.com.png',
+  coinbase: 'https://assets.coingecko.com/markets/images/23/small/Coinbase_Coin_Primary.png', // Kept from previous version
+  metamask: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880', // Kept from previous version
+  trustwallet: 'https://seeklogo.com/images/T/trust-wallet-logo-424767.png',
   ledger: 'https://placehold.co/40x40.png', // REPLACE with your Firebase Storage URL for ledger.png
 };
 
