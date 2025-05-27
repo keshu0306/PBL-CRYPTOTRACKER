@@ -21,16 +21,16 @@ interface Platform {
 }
 
 // URLs for logos.
-// Prioritizing coingecko for reliability, then seeklogo as requested, then placeholder.
+// For platforms where no logo is shown in the screenshot, logoUrl will be an empty string.
 const logoUrls = {
-  groww: 'https://seeklogo.com/images/G/groww-logo-430536.png',
-  upstox: 'https://seeklogo.com/images/U/upstox-logo-435648.png',
-  zerodha: 'https://seeklogo.com/images/Z/zerodha-logo-356512.png',
+  groww: '', // No logo for Groww (following pattern)
+  upstox: '', // No logo for Upstox as per screenshot
+  zerodha: '', // No logo for Zerodha as per screenshot
   binance: 'https://assets.coingecko.com/coins/images/825/small/binance-coin-logo.png',
   coinbase: 'https://assets.coingecko.com/markets/images/23/small/Coinbase_Coin_Primary.png',
   metamask: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880',
-  trustwallet: 'https://seeklogo.com/images/T/trust-wallet-logo-424767.png',
-  ledger: 'https://placehold.co/40x40.png', // Placeholder for Ledger
+  trustwallet: '', // No logo for Trust Wallet as per screenshot
+  ledger: 'https://placehold.co/40x40.png', // Placeholder for Ledger as per screenshot
 };
 
 const platforms: Platform[] = [
