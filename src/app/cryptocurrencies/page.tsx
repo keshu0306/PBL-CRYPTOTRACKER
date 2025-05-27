@@ -16,7 +16,7 @@ import {SparklineChart} from "@/components/sparkline-chart";
 import {useRouter} from "next/navigation";
 import {formatMarketCap} from "@/lib/utils";
 import {Button} from "@/components/ui/button";
-import {RedoIcon} from "lucide-react"; // Changed from ReloadIcon to RedoIcon
+import {RedoIcon} from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -31,7 +31,6 @@ export default function CryptocurrenciesPage() {
   const [cryptocurrencies, setCryptocurrencies] = useState<Cryptocurrency[]>([]);
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const [isGridDialogOpen, setIsGridDialogOpen] = useState(false);
 
   const fetchCryptocurrencies = useCallback(async () => {
     setIsLoading(true);
@@ -40,7 +39,6 @@ export default function CryptocurrenciesPage() {
       setCryptocurrencies(data);
     } catch (error) {
       console.error("Failed to fetch cryptocurrencies:", error);
-      // Optionally, display an error message to the user using a toast or alert
     } finally {
       setIsLoading(false);
     }
@@ -48,12 +46,13 @@ export default function CryptocurrenciesPage() {
 
   useEffect(() => {
     fetchCryptocurrencies();
-
-    // Set up interval to refetch data every, for example, 60 seconds
     const intervalId = setInterval(fetchCryptocurrencies, 60000);
-
-    return () => clearInterval(intervalId); // Clean up interval on unmount
+    return () => clearInterval(intervalId);
   }, [fetchCryptocurrencies]);
+
+  const handleRowClick = (id: string) => {
+    router.push(`/cryptocurrencies/${id}`);
+  };
 
   return (
     <div className="container mx-auto py-10">
@@ -62,13 +61,11 @@ export default function CryptocurrenciesPage() {
         <Button onClick={fetchCryptocurrencies} disabled={isLoading}  className="rounded-full hover:bg-yellow-500 hover:text-gray-900">
           {isLoading ? (
             <>
-              {/* Added animate-spin and transition */}
               <RedoIcon className="mr-2 h-4 w-4 animate-spin transition-transform duration-200" />
               Refreshing...
             </>
           ) : (
             <>
-             {/* Added transition */}
               <RedoIcon className="mr-2 h-4 w-4 transition-transform duration-200 group-hover:rotate-90" />
               Refresh
             </>
@@ -115,11 +112,14 @@ export default function CryptocurrenciesPage() {
           </TableHeader>
           <TableBody>
             {cryptocurrencies.map((crypto, index) => (
-              <TableRow key={crypto.id} onClick={() => router.push(`/cryptocurrencies/${crypto.id}`)} className="cursor-pointer transition-colors duration-200 hover:bg-muted/50">
+              <TableRow 
+                key={crypto.id} 
+                onClick={() => handleRowClick(crypto.id)} 
+                className="cursor-pointer transition-colors duration-200 hover:bg-muted/50"
+              >
                 <TableCell className="font-medium">{index + 1}</TableCell>
                 <TableCell>
                   <div className="flex items-center space-x-2 group">
-                     {/* Added transition */}
                     <img src={crypto.image} alt={crypto.name} className="w-6 h-6 rounded-full transition-transform duration-200 group-hover:scale-110"/>
                     <span>{crypto.name} ({crypto.symbol.toUpperCase()})</span>
                   </div>
@@ -145,7 +145,7 @@ export default function CryptocurrenciesPage() {
                     <span className="text-red-500">▼{crypto.priceChangePercentage7dInCurrency?.toFixed(2)}%</span>
                   )}
                 </TableCell>
-                <TableCell>${crypto.currentPrice}</TableCell>
+                <TableCell>${crypto.currentPrice.toLocaleString()}</TableCell>
                 <TableCell>${formatMarketCap(crypto.marketCap)}</TableCell>
                 <TableCell>${formatMarketCap(crypto.volume24h)}</TableCell>
                 <TableCell>

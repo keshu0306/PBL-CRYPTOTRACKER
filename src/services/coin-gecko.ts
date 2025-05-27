@@ -65,7 +65,6 @@ export async function getTopCryptocurrencies(): Promise<Cryptocurrency[]> {
     }
     const data = await response.json();
 
-    // Map the API response to the Cryptocurrency interface
     return data.map((item: any) => ({
       id: item.id,
       symbol: item.symbol,
@@ -81,7 +80,7 @@ export async function getTopCryptocurrencies(): Promise<Cryptocurrency[]> {
     }));
   } catch (error) {
     console.error('Failed to fetch cryptocurrencies:', error);
-    return []; // Return an empty array in case of an error
+    return [];
   }
 }
 
@@ -89,47 +88,60 @@ export async function getTopCryptocurrencies(): Promise<Cryptocurrency[]> {
  * Represents detailed information about a cryptocurrency.
  */
 export interface CryptocurrencyDetails {
-  /**
-   * The ID of the cryptocurrency.
-   */
   id: string;
-  /**
-   * The symbol of the cryptocurrency (e.g., BTC).
-   */
   symbol: string;
-  /**
-   * The name of the cryptocurrency (e.g., Bitcoin).
-   */
   name: string;
-  /**
-   * Description of the cryptocurrency.
-   */
-  description: string;
-  /**
-   * An array of historical price data points.
-   */
-  historicalPrices: { time: string; price: number }[];
+  description: { en: string };
+  image: { large: string };
+  market_data: {
+    current_price: { usd: number };
+    market_cap: { usd: number };
+    total_volume: { usd: number };
+    price_change_percentage_24h: number;
+    // Add other fields as needed from the API response
+  };
+  // Historical data for the chart [timestamp, price]
+  prices: Array<[number, number]>;
 }
 
 /**
- * Asynchronously retrieves detailed information for a specific cryptocurrency.
+ * Asynchronously retrieves detailed information for a specific cryptocurrency,
+ * including its 7-day historical price data.
  *
  * @param id The ID of the cryptocurrency to retrieve.
- * @returns A promise that resolves to a CryptocurrencyDetails object.
+ * @returns A promise that resolves to a CryptocurrencyDetails object or null if an error occurs.
  */
-export async function getCryptocurrencyDetails(
-  id: string
-): Promise<CryptocurrencyDetails> {
-  // TODO: Implement this by calling an API.
+export async function getCryptocurrencyDetails(id: string): Promise<CryptocurrencyDetails | null> {
+  const detailUrl = `https://api.coingecko.com/api/v3/coins/${id}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false`;
+  const chartUrl = `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=7&interval=daily`;
 
-  return {
-    id: 'bitcoin',
-    symbol: 'btc',
-    name: 'Bitcoin',
-    description: 'Bitcoin is a cryptocurrency.',
-    historicalPrices: [
-      { time: '2024-01-01', price: 40000 },
-      { time: '2024-01-02', price: 41000 },
-    ],
-  };
+  try {
+    const [detailResponse, chartResponse] = await Promise.all([
+      fetch(detailUrl),
+      fetch(chartUrl),
+    ]);
+
+    if (!detailResponse.ok) {
+      throw new Error(`HTTP error! status: ${detailResponse.status} for details`);
+    }
+    if (!chartResponse.ok) {
+      throw new Error(`HTTP error! status: ${chartResponse.status} for chart`);
+    }
+
+    const detailData = await detailResponse.json();
+    const chartData = await chartResponse.json();
+
+    return {
+      id: detailData.id,
+      symbol: detailData.symbol,
+      name: detailData.name,
+      description: detailData.description,
+      image: detailData.image,
+      market_data: detailData.market_data,
+      prices: chartData.prices,
+    };
+  } catch (error) {
+    console.error(`Failed to fetch cryptocurrency details for ${id}:`, error);
+    return null;
+  }
 }
