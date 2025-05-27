@@ -21,27 +21,28 @@ interface Platform {
 }
 
 // URLs for logos.
-// For platforms where no logo is shown in the screenshot, logoUrl will be an empty string.
+// IMPORTANT: If seeklogo.com images don't load, it's likely due to CORS or other external hosting issues.
+// For best reliability, upload these logos to your Firebase Storage and update the URLs below.
 const logoUrls = {
-  groww: '', // No logo for Groww (following pattern)
-  upstox: '', // No logo for Upstox as per screenshot
-  zerodha: '', // No logo for Zerodha as per screenshot
+  groww: 'https://seeklogo.com/images/G/groww-logo-430536.png',
+  upstox: 'https://seeklogo.com/images/U/upstox-logo-435648.png',
+  zerodha: 'https://seeklogo.com/images/Z/zerodha-logo-356512.png',
   binance: 'https://assets.coingecko.com/coins/images/825/small/binance-coin-logo.png',
   coinbase: 'https://assets.coingecko.com/markets/images/23/small/Coinbase_Coin_Primary.png',
   metamask: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880',
-  trustwallet: '', // No logo for Trust Wallet as per screenshot
-  ledger: 'https://placehold.co/40x40.png', // Placeholder for Ledger as per screenshot
+  trustwallet: 'https://seeklogo.com/images/T/trust-wallet-logo-424767.png',
+  ledger: 'https://placehold.co/40x40.png', // Placeholder for Ledger
 };
 
 const platforms: Platform[] = [
-  { name: 'Groww', logoUrl: logoUrls.groww, dataAiHint: 'groww logo investment', websiteUrl: 'https://groww.in/' },
-  { name: 'Upstox', logoUrl: logoUrls.upstox, dataAiHint: 'upstox logo trading', websiteUrl: 'https://upstox.com/' },
-  { name: 'Zerodha', logoUrl: logoUrls.zerodha, dataAiHint: 'zerodha kite logo stock', websiteUrl: 'https://zerodha.com/' },
-  { name: 'Binance', logoUrl: logoUrls.binance, dataAiHint: 'binance logo crypto exchange', websiteUrl: 'https://www.binance.com/' },
-  { name: 'Coinbase Wallet', logoUrl: logoUrls.coinbase, dataAiHint: 'coinbase wallet logo crypto', websiteUrl: 'https://www.coinbase.com/wallet' },
-  { name: 'MetaMask', logoUrl: logoUrls.metamask, dataAiHint: 'metamask logo ethereum wallet', websiteUrl: 'https://metamask.io/' },
-  { name: 'Trust Wallet', logoUrl: logoUrls.trustwallet, dataAiHint: 'trust wallet logo crypto mobile', websiteUrl: 'https://trustwallet.com/' },
-  { name: 'Ledger', logoUrl: logoUrls.ledger, dataAiHint: 'ledger nano logo hardware wallet', websiteUrl: 'https://www.ledger.com/' },
+  { name: 'Groww', logoUrl: logoUrls.groww, dataAiHint: 'groww logo investment seeklogo', websiteUrl: 'https://groww.in/' },
+  { name: 'Upstox', logoUrl: logoUrls.upstox, dataAiHint: 'upstox logo trading seeklogo', websiteUrl: 'https://upstox.com/' },
+  { name: 'Zerodha', logoUrl: logoUrls.zerodha, dataAiHint: 'zerodha kite logo stock seeklogo', websiteUrl: 'https://zerodha.com/' },
+  { name: 'Binance', logoUrl: logoUrls.binance, dataAiHint: 'binance logo crypto exchange coingecko', websiteUrl: 'https://www.binance.com/' },
+  { name: 'Coinbase Wallet', logoUrl: logoUrls.coinbase, dataAiHint: 'coinbase wallet logo crypto coingecko', websiteUrl: 'https://www.coinbase.com/wallet' },
+  { name: 'MetaMask', logoUrl: logoUrls.metamask, dataAiHint: 'metamask logo ethereum wallet coingecko', websiteUrl: 'https://metamask.io/' },
+  { name: 'Trust Wallet', logoUrl: logoUrls.trustwallet, dataAiHint: 'trust wallet logo crypto mobile seeklogo', websiteUrl: 'https://trustwallet.com/' },
+  { name: 'Ledger', logoUrl: logoUrls.ledger, dataAiHint: 'ledger nano logo hardware wallet placeholder', websiteUrl: 'https://www.ledger.com/' },
   // Add more platforms here
 ];
 
