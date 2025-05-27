@@ -1,3 +1,4 @@
+
 'use client'
 
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
@@ -12,7 +13,7 @@ export default function Home() {
       <h1 className="text-3xl font-bold mb-5 text-center">Track All Your Wallets &amp; Exchanges From One Place</h1>
       <p className="text-lg mb-8 text-muted-foreground text-center">Connect your entire portfolio to track, buy, swap, and stake your assets.</p>
 
-      <div className="flex justify-center space-x-4 mb-8 flex-wrap gap-4"> {/* Added flex-wrap and gap */}
+      <div className="flex justify-center mb-8 flex-wrap gap-4"> {/* Adjusted class: removed space-x-4, using gap-4 */}
         <div className="flex flex-col items-center rounded-lg p-3 shadow-md transition-transform duration-200 hover:scale-105" style={{backgroundColor: 'hsl(var(--secondary))'}}>
            {/* Added transition */}
           <img src="https://assets.coingecko.com/coins/images/1344/small/binance.png?1547034769" alt="Binance" className="w-12 h-12 rounded-md mb-2 object-contain transition-transform duration-200 hover:scale-110"/>
@@ -32,8 +33,8 @@ export default function Home() {
           <Button variant="outline" size="sm" className="rounded-full mt-2">Connect →</Button>
         </div>
         <div className="flex flex-col items-center rounded-lg p-3 shadow-md transition-transform duration-200 hover:scale-105" style={{backgroundColor: 'hsl(var(--secondary))'}}>
-           {/* Added transition */}
-          <img src="https://i.imgur.com/jhkbaqQ.png" alt="Other" className="w-12 h-12 rounded-md mb-2 object-contain transition-transform duration-200 hover:scale-110"/>
+           {/* Added transition, updated image src and added data-ai-hint */}
+          <img src="https://placehold.co/48x48.png" data-ai-hint="wallet connect" alt="Other" className="w-12 h-12 rounded-md mb-2 object-contain transition-transform duration-200 hover:scale-110"/>
           <span className="text-sm">Other</span>
           <Button variant="outline" size="sm" className="rounded-full mt-2">Connect →</Button>
         </div>
