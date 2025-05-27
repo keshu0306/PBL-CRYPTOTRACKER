@@ -22,26 +22,27 @@ interface Platform {
 // TODO: Replace these placeholder URLs with your actual Firebase Storage URLs
 // after uploading the logo images to the 'logos/' directory in Firebase Storage.
 // Example format: "https://firebasestorage.googleapis.com/v0/b/YOUR_PROJECT_ID.appspot.com/o/logos%2Fgroww.png?alt=media"
+// For now, using placehold.co for generic placeholders and CoinGecko for specific ones to match the screenshot.
 const logoUrls = {
-  groww: 'https://placehold.co/40x40.png', // Expected Firebase path: logos/groww.png
-  upstox: 'https://placehold.co/40x40.png', // Expected Firebase path: logos/upstox.png
-  zerodha: 'https://placehold.co/40x40.png', // Expected Firebase path: logos/zerodha.png
-  binance: 'https://assets.coingecko.com/coins/images/825/small/binance-coin-logo.png', // Using Coingecko, expected Firebase path: logos/binance.png
-  coinbase: 'https://assets.coingecko.com/markets/images/23/small/Coinbase_Coin_Primary.png', // Using Coingecko, expected Firebase path: logos/coinbase.png
-  metamask: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880', // Using Coingecko, expected Firebase path: logos/metamask.png
-  trustwallet: 'https://placehold.co/40x40.png', // Expected Firebase path: logos/trustwallet.png
-  ledger: 'https://placehold.co/40x40.png', // Placeholder for Ledger, expected Firebase path: logos/ledger.png (if you add it)
+  groww: 'https://placehold.co/40x40.png',
+  upstox: 'https://placehold.co/40x40.png',
+  zerodha: 'https://placehold.co/40x40.png',
+  binance: 'https://assets.coingecko.com/coins/images/825/small/binance-coin-logo.png',
+  coinbase: 'https://assets.coingecko.com/markets/images/23/small/Coinbase_Coin_Primary.png',
+  metamask: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880',
+  trustwallet: 'https://placehold.co/40x40.png',
+  ledger: 'https://placehold.co/40x40.png',
 };
 
 const platforms: Platform[] = [
-  { name: 'Groww', logoUrl: logoUrls.groww, dataAiHint: 'groww logo' },
-  { name: 'Upstox', logoUrl: logoUrls.upstox, dataAiHint: 'upstox logo' },
-  { name: 'Zerodha', logoUrl: logoUrls.zerodha, dataAiHint: 'zerodha kite logo' },
-  { name: 'Binance', logoUrl: logoUrls.binance, dataAiHint: 'binance logo' },
-  { name: 'Coinbase Wallet', logoUrl: logoUrls.coinbase, dataAiHint: 'coinbase logo' },
-  { name: 'MetaMask', logoUrl: logoUrls.metamask, dataAiHint: 'metamask logo ethereum' },
-  { name: 'Trust Wallet', logoUrl: logoUrls.trustwallet, dataAiHint: 'trust wallet logo' },
-  { name: 'Ledger', logoUrl: logoUrls.ledger, dataAiHint: 'ledger nano logo' },
+  { name: 'Groww', logoUrl: logoUrls.groww, dataAiHint: 'groww logo investment' },
+  { name: 'Upstox', logoUrl: logoUrls.upstox, dataAiHint: 'upstox logo trading' },
+  { name: 'Zerodha', logoUrl: logoUrls.zerodha, dataAiHint: 'zerodha kite logo stock' },
+  { name: 'Binance', logoUrl: logoUrls.binance, dataAiHint: 'binance logo crypto exchange' },
+  { name: 'Coinbase Wallet', logoUrl: logoUrls.coinbase, dataAiHint: 'coinbase wallet logo crypto' },
+  { name: 'MetaMask', logoUrl: logoUrls.metamask, dataAiHint: 'metamask logo ethereum wallet' },
+  { name: 'Trust Wallet', logoUrl: logoUrls.trustwallet, dataAiHint: 'trust wallet logo crypto mobile' },
+  { name: 'Ledger', logoUrl: logoUrls.ledger, dataAiHint: 'ledger nano logo hardware wallet' },
   // Add more platforms here
 ];
 
