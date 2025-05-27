@@ -15,35 +15,33 @@ import { Wallet } from 'lucide-react'; // Using a generic wallet icon
 
 interface Platform {
   name: string;
-  logoUrl?: string; // Made optional
+  logoUrl?: string;
   dataAiHint: string;
   websiteUrl: string;
 }
 
-// URLs for logos that are known to work or are specific.
-// For others, we will omit the <img> tag to match the screenshot.
+// URLs for logos.
+// Prioritizing coingecko for reliability, then seeklogo as requested, then placeholder.
 const logoUrls = {
-  // These were provided by the user and were problematic.
-  // For platforms where logos are not shown in the screenshot, we will omit them.
-  // groww: 'https://seeklogo.com/images/G/groww-logo-430536.png',
-  // upstox: 'https://seeklogo.com/images/U/upstox-logo-435648.png',
-  // zerodha: 'https://seeklogo.com/images/Z/zerodha-logo-356512.png',
-  binance: 'https://assets.coingecko.com/coins/images/825/small/binance-coin-logo.png', // Working CoinGecko URL
-  coinbase: 'https://assets.coingecko.com/markets/images/23/small/Coinbase_Coin_Primary.png', // Working CoinGecko URL
-  metamask: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880', // Working CoinGecko URL
-  // trustwallet: 'https://seeklogo.com/images/T/trust-wallet-logo-424767.png',
-  // ledger: 'https://placehold.co/40x40.png', // Placeholder
+  groww: 'https://seeklogo.com/images/G/groww-logo-430536.png',
+  upstox: 'https://seeklogo.com/images/U/upstox-logo-435648.png',
+  zerodha: 'https://seeklogo.com/images/Z/zerodha-logo-356512.png',
+  binance: 'https://assets.coingecko.com/coins/images/825/small/binance-coin-logo.png',
+  coinbase: 'https://assets.coingecko.com/markets/images/23/small/Coinbase_Coin_Primary.png',
+  metamask: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880',
+  trustwallet: 'https://seeklogo.com/images/T/trust-wallet-logo-424767.png',
+  ledger: 'https://placehold.co/40x40.png', // Placeholder for Ledger
 };
 
 const platforms: Platform[] = [
-  { name: 'Groww', dataAiHint: 'groww logo investment', websiteUrl: 'https://groww.in/' },
-  { name: 'Upstox', dataAiHint: 'upstox logo trading', websiteUrl: 'https://upstox.com/' },
-  { name: 'Zerodha', dataAiHint: 'zerodha kite logo stock', websiteUrl: 'https://zerodha.com/' },
+  { name: 'Groww', logoUrl: logoUrls.groww, dataAiHint: 'groww logo investment', websiteUrl: 'https://groww.in/' },
+  { name: 'Upstox', logoUrl: logoUrls.upstox, dataAiHint: 'upstox logo trading', websiteUrl: 'https://upstox.com/' },
+  { name: 'Zerodha', logoUrl: logoUrls.zerodha, dataAiHint: 'zerodha kite logo stock', websiteUrl: 'https://zerodha.com/' },
   { name: 'Binance', logoUrl: logoUrls.binance, dataAiHint: 'binance logo crypto exchange', websiteUrl: 'https://www.binance.com/' },
   { name: 'Coinbase Wallet', logoUrl: logoUrls.coinbase, dataAiHint: 'coinbase wallet logo crypto', websiteUrl: 'https://www.coinbase.com/wallet' },
   { name: 'MetaMask', logoUrl: logoUrls.metamask, dataAiHint: 'metamask logo ethereum wallet', websiteUrl: 'https://metamask.io/' },
-  { name: 'Trust Wallet', dataAiHint: 'trust wallet logo crypto mobile', websiteUrl: 'https://trustwallet.com/' },
-  { name: 'Ledger', dataAiHint: 'ledger nano logo hardware wallet', websiteUrl: 'https://www.ledger.com/' },
+  { name: 'Trust Wallet', logoUrl: logoUrls.trustwallet, dataAiHint: 'trust wallet logo crypto mobile', websiteUrl: 'https://trustwallet.com/' },
+  { name: 'Ledger', logoUrl: logoUrls.ledger, dataAiHint: 'ledger nano logo hardware wallet', websiteUrl: 'https://www.ledger.com/' },
   // Add more platforms here
 ];
 
@@ -57,9 +55,6 @@ const ConnectPortfolioDialog: React.FC<ConnectPortfolioDialogProps> = ({ onOpenC
     if (platform.websiteUrl) {
       window.open(platform.websiteUrl, '_blank', 'noopener,noreferrer');
     }
-    // In a real app, this might initiate an OAuth flow or similar
-    // For now, we'll just open the website and optionally close the dialog.
-    // if (onOpenChange) onOpenChange(false); // Optionally close dialog on action
   };
 
   return (
@@ -92,7 +87,7 @@ const ConnectPortfolioDialog: React.FC<ConnectPortfolioDialogProps> = ({ onOpenC
                   }}
                 />
               )}
-              <span className={`text-base font-medium ${!platform.logoUrl ? 'ml-0' : ''}`}>{platform.name}</span>
+              <span className={`text-base font-medium ${!platform.logoUrl ? 'ml-11' : ''}`}>{platform.name}</span>
               <span className="ml-auto text-xs text-muted-foreground group-hover:text-accent-foreground">Connect →</span>
             </Button>
           ))}
