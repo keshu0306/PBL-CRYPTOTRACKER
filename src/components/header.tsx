@@ -78,11 +78,6 @@ const Header = () => {
           alt="Bitcoin Icon"
           className="h-8 w-8 rounded-full transition-transform duration-200 hover:scale-110"
         />
-        <img
-          src="https://picsum.photos/id/788/32/32"
-          alt="App Logo"
-          className="rounded-full transition-transform duration-200 hover:scale-110"
-        />
         <Link href="/" className="font-bold text-xl transition-opacity duration-200 hover:opacity-80">
           Crypto Tracker
         </Link>
