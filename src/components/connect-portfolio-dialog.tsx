@@ -65,7 +65,7 @@ const ConnectPortfolioDialog: React.FC<ConnectPortfolioDialogProps> = ({ onOpenC
                 src={platform.logoUrl}
                 alt={`${platform.name} logo`}
                 data-ai-hint={platform.dataAiHint}
-                className="w-7 h-7 mr-3 rounded-md object-contain transition-transform duration-200 group-hover:scale-110"
+                className="w-8 h-8 mr-3 rounded-md object-contain transition-transform duration-200 group-hover:scale-110" // Adjusted size to w-8 h-8
               />
               <span className="text-base font-medium">{platform.name}</span>
               <span className="ml-auto text-xs text-muted-foreground group-hover:text-accent-foreground">Connect →</span>
@@ -83,7 +83,6 @@ const ConnectPortfolioDialog: React.FC<ConnectPortfolioDialogProps> = ({ onOpenC
         <span className="text-base font-medium">Connect Other Wallet/Exchange</span>
       </Button>
 
-      {/* DialogClose is handled by the parent DialogContent component */}
     </DialogContent>
   );
 };
