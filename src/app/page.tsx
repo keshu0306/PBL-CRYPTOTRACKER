@@ -9,8 +9,8 @@ import {Button} from "@/components/ui/button";
 
 const logoMap: Record<string, string> = {
   "Binance": "https://cryptologos.cc/logos/binance-coin-bnb-logo.png?v=026",
-  "MetaMask": "https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880", // Kept as per instruction
-  "Coinbase (Individ...)": "https://cryptologos.cc/logos/coinbase-coinbase-logo.png?v=026",
+  "MetaMask": "https://assets.coingecko.com/coins/images/279/small/ethereum.png?1595348880",
+  "Coinbase": "https://cryptologos.cc/logos/coinbase-coinbase-logo.png?v=026",
   "Other": "https://cdn-icons-png.flaticon.com/512/565/565547.png"
 };
 
@@ -35,8 +35,8 @@ export default function Home() {
           <Button variant="outline" size="sm" className="rounded-full mt-2">Connect →</Button>
         </div>
         <div className="flex flex-col items-center rounded-lg p-3 shadow-md transition-transform duration-200 hover:scale-105" style={{backgroundColor: 'hsl(var(--secondary))'}}>
-          <img src={getLogo("Coinbase (Individ...)")} data-ai-hint="coinbase logo" alt="Coinbase" className="w-12 h-12 rounded-md mb-2 object-contain transition-transform duration-200 hover:scale-110"/>
-          <span className="text-sm">Coinbase (Individ...)</span>
+          <img src={getLogo("Coinbase")} data-ai-hint="coinbase logo" alt="Coinbase" className="w-12 h-12 rounded-md mb-2 object-contain transition-transform duration-200 hover:scale-110"/>
+          <span className="text-sm">Coinbase</span>
           <Button variant="outline" size="sm" className="rounded-full mt-2">Connect →</Button>
         </div>
         <div className="flex flex-col items-center rounded-lg p-3 shadow-md transition-transform duration-200 hover:scale-105" style={{backgroundColor: 'hsl(var(--secondary))'}}>
